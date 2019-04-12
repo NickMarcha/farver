@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// TouchInputController, Singleton MonoBehaviour contains UnityEvents other classes can listen to for tap and swipe input.
+/// </summary>
 public class TouchInputController : MonoBehaviour
 {
+	/// Swipe and Tap code derived from https://forum.unity.com/threads/simple-swipe-and-tap-mobile-input.376160/ 
+	
+	
 	public static TouchInputController Instance { get; private set; }
 
 	/// <summary>
