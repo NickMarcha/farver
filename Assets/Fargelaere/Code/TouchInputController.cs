@@ -183,15 +183,15 @@ public class TouchInputController : MonoBehaviour
 	{
 		if (swipe != null)
 		{
-			Instance.SwipeD4.AddListener(swipe);
+			Instance?.SwipeD4.AddListener(swipe);
 		}
 		if (tapV2 != null)
 		{
-			Instance.TapScreenV2.AddListener(tapV2);
+			Instance?.TapScreenV2.AddListener(tapV2);
 		}
 		if ( tapObj != null)
 		{
-			Instance.TapObject.AddListener(tapObj);
+			Instance?.TapObject.AddListener(tapObj);
 		}
 	}
 
@@ -199,15 +199,15 @@ public class TouchInputController : MonoBehaviour
 	{
 		if (swipe != null)
 		{
-			Instance.SwipeD4.RemoveListener(swipe);
+			Instance?.SwipeD4.RemoveListener(swipe);
 		}
 		if (tapV2 != null)
 		{
-			Instance.TapScreenV2.RemoveListener(tapV2);
+			Instance?.TapScreenV2.RemoveListener(tapV2);
 		}
 		if (tapObj != null)
 		{
-			Instance.TapObject.RemoveListener(tapObj);
+			Instance?.TapObject.RemoveListener(tapObj);
 		}
 	}
 
