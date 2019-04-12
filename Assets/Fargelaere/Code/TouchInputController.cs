@@ -20,7 +20,7 @@ public class TouchInputController : MonoBehaviour
 	/// <summary>
 	/// Event for Taps, returns raycast Object
 	/// </summary>
-	public GameObjectEvent TapScreenObject = new GameObjectEvent();
+	public GameObjectEvent TapObject = new GameObjectEvent();
 
 	/// <summary>
 	/// Enable debug for swipes with arrow keys.
@@ -102,7 +102,7 @@ public class TouchInputController : MonoBehaviour
 				{
 					Transform objectHit = hit.transform;
 
-					TapScreenObject.Invoke(objectHit.gameObject);
+					TapObject.Invoke(objectHit.gameObject);
 				}
 			}
 		}
@@ -163,7 +163,7 @@ public class TouchInputController : MonoBehaviour
 					{
 						Transform objectHit = hit.transform;
 
-						TapScreenObject.Invoke(objectHit.gameObject);
+						TapObject.Invoke(objectHit.gameObject);
 					}
 				}
 			}
@@ -172,6 +172,38 @@ public class TouchInputController : MonoBehaviour
 		#endregion
 	}
 
+
+	public static void AddListeners(UnityAction<Direction4> swipe = null, UnityAction<Vector2> tapV2 = null, UnityAction<GameObject> tapObj = null)
+	{
+		if (swipe != null)
+		{
+			Instance.SwipeD4.AddListener(swipe);
+		}
+		if (tapV2 != null)
+		{
+			Instance.TapScreenV2.AddListener(tapV2);
+		}
+		if ( tapObj != null)
+		{
+			Instance.TapObject.AddListener(tapObj);
+		}
+	}
+
+	public static void RemoveListeners(UnityAction<Direction4> swipe = null, UnityAction<Vector2> tapV2 = null, UnityAction<GameObject> tapObj = null)
+	{
+		if (swipe != null)
+		{
+			Instance.SwipeD4.RemoveListener(swipe);
+		}
+		if (tapV2 != null)
+		{
+			Instance.TapScreenV2.RemoveListener(tapV2);
+		}
+		if (tapObj != null)
+		{
+			Instance.TapObject.RemoveListener(tapObj);
+		}
+	}
 
 	#region custom Unity events
 
@@ -192,6 +224,7 @@ public class TouchInputController : MonoBehaviour
 	{
 
 	}
+
 
 
 	#endregion

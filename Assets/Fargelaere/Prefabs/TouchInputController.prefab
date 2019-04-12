@@ -53,10 +53,10 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: TouchInputController+Vector2Event, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  TapScreenObject:
+  TapObject:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: TouchInputController+GameObjectEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  debugSwipes: 0
-  debugTaps: 0
+  debugSwipes: 1
+  debugTaps: 1

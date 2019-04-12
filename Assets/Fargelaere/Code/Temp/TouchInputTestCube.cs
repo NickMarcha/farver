@@ -11,15 +11,14 @@ public class TouchInputTestCube : MonoBehaviour
 
 	Color CTwo = Color.blue;
 
-	private void Start()
+	private void OnEnable()
 	{
-		contrl = TouchInputController.Instance;
+		TouchInputController.AddListeners(Move, Tap, TapObject);
+	}
 
-		contrl.SwipeD4.AddListener(Move);
-
-		contrl.TapScreenV2.AddListener(Tap);
-
-		contrl.TapScreenObject.AddListener(TapObject);
+	private void OnDisable()
+	{
+		TouchInputController.RemoveListeners(Move, Tap, TapObject);
 	}
 
 	private void Move( Direction4 dir)
