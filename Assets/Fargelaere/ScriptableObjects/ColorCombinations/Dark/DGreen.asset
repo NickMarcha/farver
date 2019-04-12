@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48bcd226d0dde04c9065c16af6a9d05, type: 3}
+  m_Name: DGreen
+  m_EditorClassIdentifier: 
+  ColorA: {fileID: 11400000, guid: fa6ee71dd40b1b64ba23938c41f63e02, type: 2}
+  ColorB: {fileID: 11400000, guid: 443f8bfa6ee04a84fa1b081d4a426292, type: 2}
+  Result: {fileID: 11400000, guid: 67c2419cee7d80049943ac81ec7d39c4, type: 2}
