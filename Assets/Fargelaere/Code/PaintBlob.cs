@@ -38,9 +38,6 @@ public class PaintBlob : MonoBehaviour
 
     private void Update()
     {
-		/*
-         * FOR DEBUGING PURPOSES
-         */
 		TouchInputController.AddListeners(Push);
     }
 
@@ -59,18 +56,30 @@ public class PaintBlob : MonoBehaviour
         StartCoroutine(nameof(CoPush), direction);
     }
 
-    /// <summary>
-    /// Pushes the blob in the given direction until it hits a solid tile
-    /// </summary>
-    /// <param name="direction"></param>
-    /// <returns></returns>
-    private IEnumerator CoPush(Direction4 direction)
+	/// <summary>
+	/// Changes the slide direction of the blob to the given direction
+	/// </summary>
+	/// <param name="direction"></param>
+	public void ChangeDirection(Direction4 direction)
+	{
+		
+		StopCoroutine(nameof(CoPush));
+		_blobsInAnimation--;
+		StartCoroutine(nameof(CoPush), direction);
+	}
+	/// <summary>
+	/// Pushes the blob in the given direction until it hits a solid tile
+	/// </summary>
+	/// <param name="direction"></param>
+	/// <returns></returns>
+	private IEnumerator CoPush(Direction4 direction)
     {
         //Mark as in motion
         _blobsInAnimation++;
 
         //Push one-by-one tile until the next tile is solid
-        while (!(TileMap.GetTile(TilePosition + Vector3Int.RoundToInt(direction.ToVector2())) as PuzzleTile).Solid)
+		//TODO: Check if next tile exist?
+        while (!(TileMap.GetTile(TilePosition + Vector3Int.RoundToInt(direction.ToVector2())) as PuzzleTile).CanPass(direction))
         {
             yield return CoSlideOneTile(direction);
         }
@@ -93,5 +102,8 @@ public class PaintBlob : MonoBehaviour
             transform.Translate(direction.ToVector2() / GRANULARITY);
             yield return new WaitForSeconds(SLIDE_TIME / GRANULARITY);
         }
-    }
+
+		(TileMap.GetTile(TilePosition)as PuzzleTile)?.OnPaintSlide(this, TilePosition, direction);
+
+	}
 }
