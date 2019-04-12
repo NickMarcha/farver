@@ -197,6 +197,11 @@ public class TouchInputController : MonoBehaviour
 
 	public static void RemoveListeners(UnityAction<Direction4> swipe = null, UnityAction<Vector2> tapV2 = null, UnityAction<GameObject> tapObj = null)
 	{
+		if(Instance == null)
+		{
+			Debug.LogWarning("No instance of TouchInputController");
+			return;
+		}
 		if (swipe != null)
 		{
 			Instance?.SwipeD4.RemoveListener(swipe);

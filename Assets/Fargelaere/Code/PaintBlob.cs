@@ -38,17 +38,10 @@ public class PaintBlob : MonoBehaviour
 
     private void Update()
     {
-        /*
+		/*
          * FOR DEBUGING PURPOSES
          */
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            Push(Direction4.Up);
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            Push(Direction4.Right);
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            Push(Direction4.Down);
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            Push(Direction4.Left);
+		TouchInputController.AddListeners(Push);
     }
 
     /// <summary>
