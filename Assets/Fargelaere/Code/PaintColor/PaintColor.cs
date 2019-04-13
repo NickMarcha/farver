@@ -12,6 +12,7 @@ public class PaintColor : ScriptableObject
 
     public void Apply(PaintBlob blob)
     {
+        blob.Color = this;
         blob.GetComponent<SpriteRenderer>().color = Colorization;
     }
 }

@@ -14,4 +14,15 @@ public class ColorCombination : ScriptableObject
 
     [Header("Output")]
     public PaintColor Result;
+
+    /// <summary>
+    /// Do the given colors match the input colors of this color combination?
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public bool Matches(PaintColor a, PaintColor b)
+    {
+        return (ColorA == a && ColorB == b) || (ColorA == b && ColorB == a);
+    }
 }
