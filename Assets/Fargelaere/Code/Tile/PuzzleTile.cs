@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Puzzle Tile")]
+[CreateAssetMenu(menuName = "Tiles/Puzzle Tile")]
 /// <summary>
 /// Represents a tile used in this game
 /// </summary>

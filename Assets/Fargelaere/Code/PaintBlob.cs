@@ -25,7 +25,8 @@ public class PaintBlob : MonoBehaviour
     /// </summary>
     public Vector3Int TilePosition
     {
-        get => TileMap.LocalToCell(transform.position);
+		//TODO: this needs to be handled, changed because of bug after loading map
+        get => TileMap?TileMap.LocalToCell(transform.position):GetComponentInParent<Tilemap>().LocalToCell(transform.position);
         set => TileMap.CellToLocal(value);
     }
 

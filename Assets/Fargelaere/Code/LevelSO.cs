@@ -6,25 +6,17 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(menuName = "LevelController/level")]
 public class LevelSO : ScriptableObject
 {
-    
-	private TileBase[,,] tiles;
 
-	private Vector3Int startPos;
+	private LevelController.LevelInfo level;
 
 
-	public void Save(TileBase[,,] tiles, Vector3Int startPos)
+	public void Save(LevelController.LevelInfo level)
 	{
-		this.tiles = tiles;
-		this.startPos = startPos;
+		this.level = level;
 	}
 
-	public TileBase[,,]GetTiles()
+	public LevelController.LevelInfo GetLevel()
 	{
-		return tiles;
-	}
-
-	public Vector3Int GetStartPos()
-	{
-		return startPos;
+		return level;
 	}
 }
