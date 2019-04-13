@@ -8,9 +8,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Paint Color")]
 public class PaintColor : ScriptableObject
 {
+    [HideInSubClass]
     public Color Colorization;
 
-    public void Apply(PaintBlob blob)
+    public virtual void Apply(PaintBlob blob)
     {
         blob.Color = this;
         blob.GetComponent<SpriteRenderer>().color = Colorization;

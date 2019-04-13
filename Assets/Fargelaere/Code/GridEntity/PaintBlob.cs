@@ -23,19 +23,39 @@ public class PaintBlob : Pushable
     public ColorCombination[] PossibleCombinations;
 
     /// <summary>
+    /// The color combination to use if the two colors don't combine
+    /// </summary>
+    public PaintColor Fallback;
+
+    /// <summary>
     /// Merges this blob with another blob, combining their colors.
     /// </summary>
     /// <param name="blob"></param>
     public void MergeWith(PaintBlob blob)
     {
-        foreach (ColorCombination i in PossibleCombinations)
+        PaintColor result = Fallback;
+
+
+        //The colors were identical. No merge is required
+        if (blob.Color == Color)
         {
-            if (i.Matches(Color, blob.Color))
+            result = Color;
+        }
+        else
+        {
+            //Attempts to find a matching color combination
+            foreach (ColorCombination i in PossibleCombinations)
             {
-                Destroy(blob.gameObject);
-                i.Result.Apply(this);
+                if (i.Matches(Color, blob.Color))
+                {
+                    result = i.Result;
+                }
             }
         }
+
+        Destroy(blob.gameObject);
+        result.Apply(this);
+
     }
 
     public override void OnSlideIntoObject(GridEntity other)
