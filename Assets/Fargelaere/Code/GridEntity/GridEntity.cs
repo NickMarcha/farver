@@ -71,6 +71,8 @@ public class GridEntity : MonoBehaviour
         return true;
     }
 
+    public virtual void OnSlideIntoObject(GridEntity other) { }
+
     /// <summary>
     /// Gets every GridEntity in a given tilemap
     /// </summary>

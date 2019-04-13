@@ -65,6 +65,13 @@ public class Pushable : GridEntity
             //Run events
             OnSlideOnto(TileMap.GetTile(TilePosition) as PuzzleTile, direction);
             (TileMap.GetTile(TilePosition) as PuzzleTile)?.OnPaintSlide(this, TilePosition, direction);
+
+            foreach (GridEntity i in GetGridEntities(TileMap).Where(i => i.TilePosition == TilePosition))
+            {
+                OnSlideIntoObject(i);
+                i.OnSlideIntoObject(this);
+            }
+
         }
 
         Sliding = false;
