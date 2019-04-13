@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b48bcd226d0dde04c9065c16af6a9d05, type: 3}
-  m_Name: DPurple
+  m_Name: LPurple
   m_EditorClassIdentifier: 
   ColorA: {fileID: 11400000, guid: fb09b725c0f572b4a989fd6329927a9a, type: 2}
-  ColorB: {fileID: 11400000, guid: 443f8bfa6ee04a84fa1b081d4a426292, type: 2}
-  Result: {fileID: 11400000, guid: 403b124f82314da4c859078dc5e17085, type: 2}
+  ColorB: {fileID: 11400000, guid: 8bd51b9b0e3a1af42b9f14bbb70ea08c, type: 2}
+  Result: {fileID: 11400000, guid: 9f8dbcb54dcf69148a2b46c716d68350, type: 2}
