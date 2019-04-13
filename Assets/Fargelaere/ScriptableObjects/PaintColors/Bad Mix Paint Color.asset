@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1c24f6cbd30cad4baed086b00a1b8d8, type: 3}
-  m_Name: New Bad Mix Paint Color
+  m_Name: Bad Mix Paint Color
   m_EditorClassIdentifier: 
-  Colorization: {r: 0, g: 0, b: 0, a: 0}
-  BadMixSprite: {fileID: 0}
+  Colorization: {r: 1, g: 1, b: 1, a: 1}
+  BadMixSprite: {fileID: 21300000, guid: e7c6e1e7d5d1ad048bd074cec370d9f8, type: 3}

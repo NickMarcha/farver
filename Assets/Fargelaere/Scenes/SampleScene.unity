@@ -138,9 +138,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 140761841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c3e2c71abb98b469639bc69e14836b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b549ee5ccd002e44b597c9e32b5a967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tmap: {fileID: 1425890000}
+  blobPrefab: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
+    type: 3}
+  TrackTileChanges: 0
 --- !u!4 &140761843
 Transform:
   m_ObjectHideFlags: 0
@@ -351,18 +355,24 @@ PrefabInstance:
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.49738646
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bcbd0e0ee4767194ab4993747bd36883,
+        type: 3}
     - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: PossibleCombinations.Array.size
@@ -372,7 +382,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Color
       value: 
-      objectReference: {fileID: 11400000, guid: e735e949f4ab17245b1b83a446df7a65,
+      objectReference: {fileID: 11400000, guid: 3c525897105de1e4ca4db745fd62edd5,
         type: 2}
     - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
@@ -732,6 +742,7 @@ Transform:
   m_Children:
   - {fileID: 1835275513}
   - {fileID: 2043633212}
+  - {fileID: 1512806623}
   m_Father: {fileID: 577837061}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1385,6 +1396,113 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!4 &1512806623 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1820641687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1820641687
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1425889998}
+    m_Modifications:
+    - target: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_Name
+      value: PaintBlob (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.1754183
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.22747892
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: PossibleCombinations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: Color
+      value: 
+      objectReference: {fileID: 11400000, guid: e17f0bb08442d5e48805da1819ec3fef,
+        type: 2}
+    - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: PossibleCombinations.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c1c6a9b8c80910e4d9c30127a0e217bc,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1226124edae962498a7759235f7bff7, type: 3}
 --- !u!4 &1835275513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
