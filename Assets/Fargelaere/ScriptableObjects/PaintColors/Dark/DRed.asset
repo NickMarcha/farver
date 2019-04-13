@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595fdc82867771b46bcf65aa1e44d3cc, type: 3}
   m_Name: DRed
   m_EditorClassIdentifier: 
-  Colorization: {r: 0.41509432, g: 0.13118546, b: 0.13118546, a: 0}
+  Colorization: {r: 0.41509432, g: 0.13118546, b: 0.13118546, a: 1}

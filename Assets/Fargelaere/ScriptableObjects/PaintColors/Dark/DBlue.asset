@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595fdc82867771b46bcf65aa1e44d3cc, type: 3}
   m_Name: DBlue
   m_EditorClassIdentifier: 
-  Colorization: {r: 0.1754183, g: 0.22747892, b: 0.509434, a: 0}
+  Colorization: {r: 0.1754183, g: 0.22747892, b: 0.509434, a: 1}

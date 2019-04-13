@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595fdc82867771b46bcf65aa1e44d3cc, type: 3}
   m_Name: DPurple
   m_EditorClassIdentifier: 
-  Colorization: {r: 0.36008915, g: 0.19010323, b: 0.4528302, a: 0}
+  Colorization: {r: 0.36008915, g: 0.19010323, b: 0.4528302, a: 1}
