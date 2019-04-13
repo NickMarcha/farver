@@ -12,50 +12,53 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class PaintBlob : MonoBehaviour
 {
-    /// <summary>
-    /// The tilemap this blob is attatched to
-    /// </summary>
-    private Tilemap TileMap;
+	/// <summary>
+	/// The tilemap this blob is attatched to
+	/// </summary>
+	private Tilemap TileMap;
 
-    //This variable makes sure that you cant repush blobs while any blob is moving
-    private static int _blobsInAnimation;
+	//This variable makes sure that you cant repush blobs while any blob is moving
+	private static int _blobsInAnimation;
 
-    /// <summary>
-    /// Gets or sets the position of the tile the blob is over
-    /// </summary>
-    public Vector3Int TilePosition
-    {
+	/// <summary>
+	/// Gets or sets the position of the tile the blob is over
+	/// </summary>
+	public Vector3Int TilePosition
+	{
 		//TODO: this needs to be handled, changed because of bug after loading map
-        get => TileMap?TileMap.LocalToCell(transform.position):GetComponentInParent<Tilemap>().LocalToCell(transform.position);
-        set => TileMap.CellToLocal(value);
-    }
+		get => TileMap ? TileMap.LocalToCell(transform.position) : GetComponentInParent<Tilemap>().LocalToCell(transform.position);
+		set => TileMap.CellToLocal(value);
+	}
 
-    private const float SLIDE_TIME = 0.01f;
+	private const float SLIDE_TIME = 0.01f;
 
-    private void Awake()
-    {
-        TileMap = GetComponentInParent<Tilemap>();
-    }
+	private void Awake()
+	{
+		TileMap = GetComponentInParent<Tilemap>();
+	}
 
-    private void Update()
-    {
+	private void Update()
+	{
 		TouchInputController.AddListeners(Push);
-    }
+	}
 
-    /// <summary>
-    /// Slides the blob in the given direction
-    /// </summary>
-    /// <param name="direction"></param>
-    public void Push(Direction4 direction)
-    {
-        if (_blobsInAnimation != 0)
-        {
-            //Do not push if any blob is moving
-            return;
-        }
+	/// <summary>
+	/// Slides the blob in the given direction
+	/// </summary>
+	/// <param name="direction"></param>
+	public void Push(Direction4 direction)
+	{
+		if (_blobsInAnimation != 0)
+		{
+			//Do not push if any blob is moving
+			return;
+		}
 
-        StartCoroutine(nameof(CoPush), direction);
-    }
+		StartCoroutine(nameof(CoPush), direction);
+
+		LevelController.SaveNewState();
+
+	}
 
 	/// <summary>
 	/// Changes the slide direction of the blob to the given direction
@@ -63,7 +66,7 @@ public class PaintBlob : MonoBehaviour
 	/// <param name="direction"></param>
 	public void ChangeDirection(Direction4 direction)
 	{
-		
+
 		StopCoroutine(nameof(CoPush));
 		_blobsInAnimation--;
 		StartCoroutine(nameof(CoPush), direction);
@@ -74,42 +77,37 @@ public class PaintBlob : MonoBehaviour
 	/// <param name="direction"></param>
 	/// <returns></returns>
 	private IEnumerator CoPush(Direction4 direction)
-    {
-        //Mark as in motion
-        _blobsInAnimation++;
+	{
+		//Mark as in motion
+		_blobsInAnimation++;
 
-        //Push one-by-one tile until the next tile is solid
+		//Push one-by-one tile until the next tile is solid
 		//TODO: Check if next tile exist?
-        while (!(TileMap.GetTile(TilePosition + Vector3Int.RoundToInt(direction.ToVector2())) as PuzzleTile).CanPass(direction))
-        {
-            yield return CoSlideOneTile(direction);
-        }
-
-        //Mark as standing still
-        _blobsInAnimation--;
-
-		if(_blobsInAnimation == 0)
+		while (!(TileMap.GetTile(TilePosition + Vector3Int.RoundToInt(direction.ToVector2())) as PuzzleTile).CanPass(direction))
 		{
-			LevelController.SaveNewState();
+			yield return CoSlideOneTile(direction);
 		}
-    }
 
-    /// <summary>
-    /// Slides the blob by one tile
-    /// </summary>
-    /// <param name="direction"></param>
-    /// <returns></returns>
-    private IEnumerator CoSlideOneTile(Direction4 direction)
-    {
-        const int GRANULARITY = 4;
+		//Mark as standing still
+		_blobsInAnimation--;
+	}
 
-        for (int i = 0; i < GRANULARITY; i++)
-        {
-            transform.Translate(direction.ToVector2() / GRANULARITY);
-            yield return new WaitForSeconds(SLIDE_TIME / GRANULARITY);
-        }
+	/// <summary>
+	/// Slides the blob by one tile
+	/// </summary>
+	/// <param name="direction"></param>
+	/// <returns></returns>
+	private IEnumerator CoSlideOneTile(Direction4 direction)
+	{
+		const int GRANULARITY = 4;
 
-		(TileMap.GetTile(TilePosition)as PuzzleTile)?.OnPaintSlide(this, TilePosition, direction);
+		for (int i = 0; i < GRANULARITY; i++)
+		{
+			transform.Translate(direction.ToVector2() / GRANULARITY);
+			yield return new WaitForSeconds(SLIDE_TIME / GRANULARITY);
+		}
+
+		(TileMap.GetTile(TilePosition) as PuzzleTile)?.OnPaintSlide(this, TilePosition, direction);
 
 	}
 }
