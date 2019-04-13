@@ -6,20 +6,41 @@ using UnityEngine.Tilemaps;
 
 public class LevelController : MonoBehaviour
 {
+	public static LevelController Instance { get; private set; }
 	public Tilemap tmap;
 
-	public LevelSO levelSO;
+	Stack<LevelInfo> LevelStates;
 
 	public GameObject blobPrefab;
 
-	public void SaveLevel()
+	private void Awake()
 	{
-		if (!levelSO)
+		if (!Instance)
 		{
-			Debug.LogWarning("No LevelSO found on levelcontroller");
+			Instance = this;
+		}
+		else
+		{
+			Debug.LogWarning("There is more than one LevelController in scene");
+			enabled = false;
 			return;
 		}
 
+		LevelStates = new Stack<LevelInfo>();
+	}
+
+	private void Update()
+	{
+		//Only for debug purposes
+
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			UndoState();
+		}
+	}
+
+	public void SaveNewState()
+	{
 		TileBase[,,] level = new TileBase[tmap.cellBounds.size.x, tmap.cellBounds.size.y, tmap.cellBounds.size.z];
 
 		for (int i = 0; i < level.GetLength(0); i++)
@@ -33,24 +54,26 @@ public class LevelController : MonoBehaviour
 			}
 		}
 
-
-
-
-
 		PaintBlob[] PBblobs = FindObjectsOfType<PaintBlob>();
 
 		LevelInfo.BlobInfo[] blobs = new LevelInfo.BlobInfo[PBblobs.Length];
 		for (int i = 0; i < PBblobs.Length; i++)
 		{
-			blobs[i] = new LevelInfo.BlobInfo {position = PBblobs[i].transform.position, color = PBblobs[i].GetComponent<SpriteRenderer>().color};
+			blobs[i] = new LevelInfo.BlobInfo { position = PBblobs[i].transform.position, color = PBblobs[i].GetComponent<SpriteRenderer>().color };
 		}
 
-		levelSO.Save(new LevelInfo(level, blobs, tmap.cellBounds.position));
+		LevelStates.Push(new LevelInfo(level, blobs, tmap.cellBounds.position));
 		Debug.Log("Saved Level to SO");
 	}
 
-	public void LoadLevel()
+	public void UndoState()
 	{
+		if (LevelStates.Count ==0)
+		{
+			Debug.LogWarning("Nothing to undo");
+			return;
+		}
+
 		#region clear Level
 		tmap.ClearAllTiles();
 		PaintBlob[] blobs = FindObjectsOfType<PaintBlob>();
@@ -59,14 +82,12 @@ public class LevelController : MonoBehaviour
 			DestroyImmediate(item.gameObject);
 		}
 		#endregion
-		if (!levelSO)
-		{
-			Debug.LogWarning("No LevelSO found on levelcontroller");
-			return;
-		}
-		TileBase[,,] level = levelSO.GetLevel().tiles;
 
-		Vector3Int startPos = levelSO.GetLevel().startPos;
+		LevelInfo newState = LevelStates.Pop();
+
+		TileBase[,,] level = newState.tiles;
+
+		Vector3Int startPos = newState.startPos;
 
 		for (int i = 0; i < level.GetLength(0); i++)
 		{
@@ -79,7 +100,7 @@ public class LevelController : MonoBehaviour
 			}
 		}
 
-		foreach (LevelInfo.BlobInfo item in levelSO.GetLevel().blobs)
+		foreach (LevelInfo.BlobInfo item in newState.blobs)
 		{
 			GameObject b = Instantiate(blobPrefab, item.position,Quaternion.identity, tmap.transform);
 			b.GetComponent<SpriteRenderer>().color = item.color;
