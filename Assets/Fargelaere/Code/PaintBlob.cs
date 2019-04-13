@@ -87,6 +87,11 @@ public class PaintBlob : MonoBehaviour
 
         //Mark as standing still
         _blobsInAnimation--;
+
+		if(_blobsInAnimation == 0)
+		{
+			LevelController.SaveNewState();
+		}
     }
 
     /// <summary>

@@ -39,8 +39,15 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
-	public void SaveNewState()
+	public static void SaveNewState()
 	{
+		if (Instance == null)
+		{
+			Debug.LogWarning("No instance of LevelController");
+			return;
+		}
+
+		Tilemap tmap = Instance.tmap;
 		TileBase[,,] level = new TileBase[tmap.cellBounds.size.x, tmap.cellBounds.size.y, tmap.cellBounds.size.z];
 
 		for (int i = 0; i < level.GetLength(0); i++)
@@ -62,7 +69,7 @@ public class LevelController : MonoBehaviour
 			blobs[i] = new LevelInfo.BlobInfo { position = PBblobs[i].transform.position, color = PBblobs[i].GetComponent<SpriteRenderer>().color };
 		}
 
-		LevelStates.Push(new LevelInfo(level, blobs, tmap.cellBounds.position));
+		Instance.LevelStates.Push(new LevelInfo(level, blobs, tmap.cellBounds.position));
 		Debug.Log("Saved Level to SO");
 	}
 
