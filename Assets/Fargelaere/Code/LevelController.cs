@@ -50,13 +50,13 @@ public class LevelController : MonoBehaviour
 		Tilemap tmap = Instance.tmap;
 		TileBase[,,] level = new TileBase[tmap.cellBounds.size.x, tmap.cellBounds.size.y, tmap.cellBounds.size.z];
 
-		for (int i = 0; i < level.GetLength(0); i++)
+		for (int x = 0; x < level.GetLength(0); x++)
 		{
-			for (int u = 0; u < level.GetLength(1); u++)
+			for (int y = 0; y < level.GetLength(1); y++)
 			{
-				for (int o = 0; o < level.GetLength(2); o++)
+				for (int z = 0; z < level.GetLength(2); z++)
 				{
-					level[i, u, o] = tmap.GetTile(new Vector3Int(i, u, o) + tmap.cellBounds.position);
+					level[x, y, z] = tmap.GetTile(new Vector3Int(x, y, z) + tmap.cellBounds.position);
 				}
 			}
 		}
@@ -86,7 +86,7 @@ public class LevelController : MonoBehaviour
 		PaintBlob[] blobs = FindObjectsOfType<PaintBlob>();
 		foreach (PaintBlob item in blobs)
 		{
-			DestroyImmediate(item.gameObject);
+			Destroy(item.gameObject);
 		}
 		#endregion
 

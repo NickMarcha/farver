@@ -16,10 +16,10 @@ public class PuzzleTile : Tile
 	public bool Solid;
 
 	public virtual bool CanPass(Direction4 dir) {
-		return Solid;
+		return !Solid;
 	}
 
-	public virtual void OnPaintSlide(PaintBlob blob, Vector3Int pos, Direction4 dir) {
+	public virtual void OnPaintSlide(Pushable pushable, Vector3Int pos, Direction4 dir) {
 		return;
 	}
 }

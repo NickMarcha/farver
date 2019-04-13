@@ -17,9 +17,9 @@ public class LPipeTile : PuzzleTile
 	
 	public override bool CanPass(Direction4 dir)
 	{
-		return (dir == Facing || dir == Facing.Rotate(1));
+		return (dir == Facing.Flip() || dir == Facing.Rotate(1).Flip());
 	}
-	public override void OnPaintSlide(PaintBlob blob, Vector3Int pos, Direction4 dir)
+	public override void OnPaintSlide(Pushable pushable, Vector3Int pos, Direction4 dir)
 	{
 		if(dir == Facing.Flip())
 		{
@@ -32,6 +32,6 @@ public class LPipeTile : PuzzleTile
 			Debug.LogError("Unexpectied Behaviour in LPipeTile: " + dir);
 		}
 
-		blob.ChangeDirection(dir);
+        pushable.ChangeDirection(dir);
 	}
 }
