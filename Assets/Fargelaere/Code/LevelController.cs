@@ -32,7 +32,7 @@ public class LevelController : MonoBehaviour
 
 		levelStates = new Stack<LevelInfo>();
 
-		TouchInputController.AddListeners(SaveOldState, SaveOldState);
+		//TouchInputController.AddListeners(SaveOldState, SaveOldState);
 		defaultState = GetState();
 
 	}
@@ -52,14 +52,14 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
-	public void ResetLevel()
+	public static void ResetLevel()
 	{
-		SetState(defaultState);
-		foreach (LevelInfo item in levelStates)
+		SetState(Instance.defaultState);
+		foreach (LevelInfo item in Instance.levelStates)
 		{
 			item.DeleteInfo();
 		}
-		levelStates = new Stack<LevelInfo>();
+		Instance.levelStates = new Stack<LevelInfo>();
 		Debug.Log("Reset Level & history");
 	}
 	#region So it can listen to touchInputController
@@ -73,7 +73,25 @@ public class LevelController : MonoBehaviour
 		SaveOldState();
 	}
 	#endregion
+
+
+	static bool saving = false;
+
 	public static void SaveOldState()
+	{
+		if (!saving)
+		{
+			saving = true;
+			Instance.StartCoroutine("SaveStateCo");
+		}
+	}
+	private IEnumerator SaveStateCo()
+	{
+		yield return new WaitForEndOfFrame();
+		saveOldState();
+		saving = false;
+	}
+	static void saveOldState()
 	{
 		foreach (Pushable item in FindObjectsOfType<Pushable>())
 		{
@@ -112,12 +130,10 @@ public class LevelController : MonoBehaviour
 			return;
 		}else
 		{
-			Debug.Log("State already in history");
+			Debug.Log("State Already saved");
 			newInfo.DeleteInfo();
+			return;
 		}
-
-		Debug.Log("Unexpected behaviour");
-		newInfo.DeleteInfo();
 	}
 
 	public static bool CanUndo()

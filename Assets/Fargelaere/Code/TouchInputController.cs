@@ -29,6 +29,11 @@ public class TouchInputController : MonoBehaviour
 	public GameObjectEvent TapObject = new GameObjectEvent();
 
 	/// <summary>
+	/// Event for Input, fires if any event succeded;
+	/// </summary>
+	public UnityEvent InputHappened = new UnityEvent();
+
+	/// <summary>
 	/// Enable debug for swipes with arrow keys.
 	/// </summary>
 	[Header("Debug swipes with arrowkeys")]
@@ -57,6 +62,7 @@ public class TouchInputController : MonoBehaviour
 
 
 		mainCam = Camera.main;
+		Input.simulateMouseWithTouches = false;
 	}
 
 
@@ -77,21 +83,25 @@ public class TouchInputController : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.RightArrow))
 			{
 				SwipeD4?.Invoke(Direction4.Right);
+				InputHappened?.Invoke();
 			}
 
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
 				SwipeD4?.Invoke(Direction4.Left);
+				InputHappened?.Invoke();
 			}
 
 			if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				SwipeD4?.Invoke(Direction4.Down);
+				InputHappened?.Invoke();
 			}
 
 			if (Input.GetKeyDown(KeyCode.UpArrow))
 			{
 				SwipeD4?.Invoke(Direction4.Up);
+				InputHappened?.Invoke();
 			}
 
 		}
@@ -100,15 +110,16 @@ public class TouchInputController : MonoBehaviour
 			if (Input.GetMouseButtonDown(0))
 			{
 				TapScreenV2?.Invoke(Input.mousePosition);
+				InputHappened?.Invoke();
 
-				
+
 				Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
 
 				if (Physics.Raycast(ray, out RaycastHit hit))
 				{
 					Transform objectHit = hit.transform;
 
-					TapObject.Invoke(objectHit.gameObject);
+					TapObject?.Invoke(objectHit.gameObject);
 				}
 			}
 		}
@@ -130,7 +141,7 @@ public class TouchInputController : MonoBehaviour
 			else if (touch.phase == TouchPhase.Ended) //check if the finger is removed from the screen
 			{
 				lp = touch.position;  //last touch position. Ommitted if you use list
-
+				InputHappened?.Invoke();
 				//Check if drag distance is greater than 20% of the screen height
 				if (Mathf.Abs(lp.x - fp.x) > dragDistance || Mathf.Abs(lp.y - fp.y) > dragDistance)
 				{//It's a drag
@@ -159,7 +170,7 @@ public class TouchInputController : MonoBehaviour
 					}
 				}
 				else
-				{   //It's a tap as the drag distance is less than 20% of the screen height
+				{   //It's a tap as the drag distance is less than 5% of the screen height
 					TapScreenV2?.Invoke(touch.position);
 
 					
@@ -169,7 +180,7 @@ public class TouchInputController : MonoBehaviour
 					{
 						Transform objectHit = hit.transform;
 
-						TapObject.Invoke(objectHit.gameObject);
+						TapObject?.Invoke(objectHit.gameObject);
 					}
 				}
 			}

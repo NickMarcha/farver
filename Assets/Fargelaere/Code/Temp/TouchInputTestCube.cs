@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TouchInputTestCube : MonoBehaviour
 {
-	private TouchInputController contrl;
-
-	Color COne = Color.red;
+	Color cOne = Color.red;
 	bool isOne;
 
-	Color CTwo = Color.blue;
+	Color cTwo = Color.blue;
 
 	private void OnEnable()
 	{
@@ -28,7 +26,7 @@ public class TouchInputTestCube : MonoBehaviour
 
 	private void Tap(Vector2 vec)
 	{
-		Debug.Log("Tapped" + vec);
+		//Debug.Log("Tapped" + vec);
 	}
 
 	private void TapObject(GameObject obj)
@@ -37,7 +35,7 @@ public class TouchInputTestCube : MonoBehaviour
 		{
 			isOne = !isOne;
 
-			GetComponent<MeshRenderer>().material.color = isOne ? COne : CTwo;
+			GetComponent<MeshRenderer>().material.color = isOne ? cOne : cTwo;
 		}
 	}
 }
