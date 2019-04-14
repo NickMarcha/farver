@@ -90,8 +90,16 @@ public struct LevelInfo
 
 		public static bool CompareLists(List<GridEntityInfo> left , List<GridEntityInfo> right)
 		{
-			
-			return left.All(right.Contains) && right.All(left.Contains);
+
+			if (left.Count != right.Count)
+			{
+				return false;
+			}else if (left.Count == 0)
+			{
+				return true;
+			}
+
+			return left.All(right.Contains);
 		}
 
 		public override int GetHashCode()
