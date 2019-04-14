@@ -74,8 +74,8 @@ public struct LevelInfo : IEquatable<LevelInfo>
     public bool Equals(LevelInfo other)
     {
         return startPos == other.startPos &&
-            Entities.SequenceEqual(other.Entities) &&
-            ThreeDArrayEquals(tiles, other.tiles);
+            Entities.SequenceEqual(other.Entities) /* &&
+            ThreeDArrayEquals(tiles, other.tiles)*/;
     }
 
     public static bool operator ==(LevelInfo left, LevelInfo right)
@@ -103,5 +103,15 @@ public struct LevelInfo : IEquatable<LevelInfo>
             Original.hideFlags = HideFlags.HideAndDontSave;
         }
 
-	}
+        public override bool Equals(object obj)
+        {
+            if (obj is GridEntityInfo i)
+            {
+                return Original.transform.position == i.Original.transform.position;
+            }
+
+            return false;
+        }
+
+    }
 }
