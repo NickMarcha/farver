@@ -7,11 +7,11 @@ public struct LevelInfo : IEquatable<LevelInfo>
 {
     public TileBase[,,] tiles;
 
-    public BlobInfo[] Entities;
+    public GridEntityInfo[] Entities;
 
     public Vector3Int startPos;
 
-    public LevelInfo(TileBase[,,] tiles, BlobInfo[] entities, Vector3Int startPos)
+    public LevelInfo(TileBase[,,] tiles, GridEntityInfo[] entities, Vector3Int startPos)
     {
         this.tiles = tiles;
         Entities = entities;
@@ -25,7 +25,7 @@ public struct LevelInfo : IEquatable<LevelInfo>
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns></returns>
-    private bool ThreeDArrayEquals<T>(T[,,] a, T[,,] b)
+    private bool ThreeDArrayEquals(TileBase[,,] a, TileBase[,,] b)
     {
         //Check for equal width, height and depth
         for (int dimension = 0; dimension < 3; dimension++)
@@ -45,7 +45,7 @@ public struct LevelInfo : IEquatable<LevelInfo>
                 for (int z = 0; z < a.GetLength(2); z++)
                 {
                     //Values at position (x, y, z) are not equal
-                    if (!a[x, y, z].Equals(b[x, y, z]))
+                    if (a[x, y, z] != b[x, y, z])
                     {
                         return false;
                     }
@@ -93,9 +93,15 @@ public struct LevelInfo : IEquatable<LevelInfo>
         return tiles.GetHashCode() ^ Entities.GetHashCode() ^ startPos.GetHashCode();
     }
 
-    public struct BlobInfo
+    public struct GridEntityInfo
 	{
-		public Vector3 position;
-		public Color color;
+        public GridEntity Original;
+
+        public GridEntityInfo(GridEntity original)
+        {
+            Original = UnityEngine.Object.Instantiate(original.gameObject).GetComponent<GridEntity>();
+            Original.hideFlags = HideFlags.HideAndDontSave;
+        }
+
 	}
 }
