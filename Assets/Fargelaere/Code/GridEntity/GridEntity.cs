@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// Represents a dynamic object bound to a tile map
 /// </summary>
-public class GridEntity : MonoBehaviour
+public abstract class GridEntity : MonoBehaviour, IEquatable<GridEntity>
 {
     /// <summary>
     /// The tilemap this object is connected to
@@ -82,4 +82,6 @@ public class GridEntity : MonoBehaviour
     {
         return map.GetComponentsInChildren<GridEntity>();
     }
+
+	public abstract bool Equals(GridEntity other);
 }

@@ -89,4 +89,10 @@ public class PaintBlob : Pushable
 			TouchInputController.RemoveListeners(swipe: Push);
 		}
 	}
+
+	public override bool Equals(GridEntity other)
+	{
+
+		return TilePosition == other.TilePosition && Color == (other as PaintBlob)?.Color;
+	}
 }

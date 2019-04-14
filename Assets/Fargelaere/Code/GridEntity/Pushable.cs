@@ -10,7 +10,7 @@ using UnityEngine.Tilemaps;
 /// <summary>
 /// Represents a GridEntity that can be pushed by swiping inputs
 /// </summary>
-public class Pushable : GridEntity
+public abstract class Pushable : GridEntity
 {
     /// <summary>
     /// The time it will take for this object to move one tile
