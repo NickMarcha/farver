@@ -17,6 +17,13 @@ public struct LevelInfo : IEquatable<LevelInfo>
         Entities = entities;
         this.startPos = startPos;
     }
+	public void DeleteInfo()
+	{
+		foreach (GridEntityInfo item in Entities)
+		{
+			item.DeleteOriginal();
+		}
+	}
 
     /// <summary>
     /// Checks if the two given 3D arrays are equal
@@ -95,23 +102,28 @@ public struct LevelInfo : IEquatable<LevelInfo>
 
     public struct GridEntityInfo
 	{
+
         public GridEntity Original;
 
-        public GridEntityInfo(GridEntity original)
+        public GridEntityInfo(GridEntity original, Transform trans)
         {
-            Original = UnityEngine.Object.Instantiate(original.gameObject).GetComponent<GridEntity>();
-            Original.hideFlags = HideFlags.HideAndDontSave;
+            Original = UnityEngine.Object.Instantiate(original.gameObject, trans).GetComponent<GridEntity>();
+			Original.gameObject.SetActive(false);
         }
 
         public override bool Equals(object obj)
         {
             if (obj is GridEntityInfo i)
             {
-                return Original.transform.position == i.Original.transform.position;
+				return Original.Equals(i);
             }
 
             return false;
         }
 
+		public void DeleteOriginal()
+		{
+			UnityEngine.Object.Destroy(Original.gameObject);
+		}
     }
 }

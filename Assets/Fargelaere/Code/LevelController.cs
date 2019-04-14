@@ -79,30 +79,35 @@ public class LevelController : MonoBehaviour
 
 
 		LevelInfo newInfo = GetState();
-		if (newInfo != Instance.defaultState &&(Instance.levelStates.Count == 0 || newInfo != Instance.levelStates.Peek()))
+		if (newInfo.Equals(Instance.defaultState) &&(Instance.levelStates.Count == 0 || newInfo.Equals(Instance.levelStates.Peek())))
 		{
 			Instance.levelStates.Push(newInfo);
 			Debug.Log("Saved state to history");
+		} else
+		{
+			newInfo.DeleteInfo();
 		}
 	}
 
 	public static void UndoState()
 	{
-		if (GetState() == Instance.defaultState)
+		if (GetState().Equals(Instance.defaultState))
 		{
 			Debug.LogWarning("Nothing to undo");
 			return;
 		}
 
-		if(Instance.levelStates.Count == 0)
+		if (Instance.levelStates.Count == 0)
 		{
 			SetState(Instance.defaultState);
+
 		}
-
-		
-		SetState(Instance.levelStates.Pop());
-
-		
+		else
+		{
+			LevelInfo lastState =Instance.levelStates.Pop();
+			SetState(lastState);
+			lastState.DeleteInfo();
+		}
 		Debug.Log("Undid (TrackTileChanges: " + Instance.TrackTileChanges + ")");
 	}
 
@@ -130,7 +135,7 @@ public class LevelController : MonoBehaviour
 		LevelInfo.GridEntityInfo[] blobs = new LevelInfo.GridEntityInfo[PBblobs.Length];
 		for (int i = 0; i < PBblobs.Length; i++)
 		{
-			blobs[i] = new LevelInfo.GridEntityInfo(PBblobs[i]);
+			blobs[i] = new LevelInfo.GridEntityInfo(PBblobs[i],Instance.transform);
 		}
 		return new LevelInfo(level, blobs, tmap.cellBounds.position);
 	}
@@ -171,7 +176,8 @@ public class LevelController : MonoBehaviour
 
 		foreach (LevelInfo.GridEntityInfo item in newState.Entities)
 		{
-			GameObject b = Instantiate(Instance.blobPrefab, item.Original.transform.position, Quaternion.identity, Instance.tmap.transform);
+			GameObject b = Instantiate(item.Original.gameObject, Instance.tmap.transform);
+			b.SetActive(true);
 		}
 	}
 }
