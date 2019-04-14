@@ -101,10 +101,10 @@ public class TouchInputController : MonoBehaviour
 			{
 				TapScreenV2?.Invoke(Input.mousePosition);
 
-				RaycastHit hit;
+				
 				Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
 
-				if (Physics.Raycast(ray, out hit))
+				if (Physics.Raycast(ray, out RaycastHit hit))
 				{
 					Transform objectHit = hit.transform;
 
@@ -162,10 +162,10 @@ public class TouchInputController : MonoBehaviour
 				{   //It's a tap as the drag distance is less than 20% of the screen height
 					TapScreenV2?.Invoke(touch.position);
 
-					RaycastHit hit;
+					
 					Ray ray = mainCam.ScreenPointToRay(touch.position);
 
-					if (Physics.Raycast(ray, out hit))
+					if (Physics.Raycast(ray, out RaycastHit hit))
 					{
 						Transform objectHit = hit.transform;
 

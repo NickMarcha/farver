@@ -9,7 +9,9 @@ public class LevelController : MonoBehaviour
 	public static LevelController Instance { get; private set; }
 	public Tilemap tmap;
 
-	Stack<LevelInfo> LevelStates;
+	Stack<LevelInfo> levelStates;
+
+	LevelInfo defaultState;
 
 	public GameObject blobPrefab;
 
@@ -27,7 +29,12 @@ public class LevelController : MonoBehaviour
 			return;
 		}
 
-		LevelStates = new Stack<LevelInfo>();
+		levelStates = new Stack<LevelInfo>();
+
+		TouchInputController.AddListeners(SaveOldState, SaveOldState);
+		defaultState = GetState();
+		//SaveOldState();
+
 	}
 
 	private void Update()
@@ -38,9 +45,31 @@ public class LevelController : MonoBehaviour
 		{
 			UndoState();
 		}
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			ResetLevel();
+		}
 	}
 
-	public static void SaveNewState()
+	public void ResetLevel()
+	{
+		SetState(defaultState);
+		levelStates = new Stack<LevelInfo>();
+		SaveOldState();
+	}
+	#region So it can listen to touchInputController
+	public static void SaveOldState(Direction4 dir)
+	{
+		SaveOldState();
+	}
+
+	public static void SaveOldState(Vector2 point)
+	{
+		SaveOldState();
+	}
+	#endregion
+	public static void SaveOldState()
 	{
 		if (Instance == null)
 		{
@@ -48,6 +77,37 @@ public class LevelController : MonoBehaviour
 			return;
 		}
 
+
+		LevelInfo newInfo = GetState();
+		if (newInfo != Instance.defaultState &&(Instance.levelStates.Count == 0 || newInfo != Instance.levelStates.Peek()))
+		{
+			Instance.levelStates.Push(newInfo);
+			Debug.Log("Saved state to history");
+		}
+	}
+
+	public static void UndoState()
+	{
+		if (GetState() == Instance.defaultState)
+		{
+			Debug.LogWarning("Nothing to undo");
+			return;
+		}
+
+		if(Instance.levelStates.Count == 0)
+		{
+			SetState(Instance.defaultState);
+		}
+
+		
+		SetState(Instance.levelStates.Pop());
+
+		
+		Debug.Log("Undid (TrackTileChanges: " + Instance.TrackTileChanges + ")");
+	}
+
+	static LevelInfo GetState()
+	{
 		Tilemap tmap = Instance.tmap;
 		TileBase[,,] level = new TileBase[tmap.cellBounds.size.x, tmap.cellBounds.size.y, tmap.cellBounds.size.z];
 
@@ -65,26 +125,18 @@ public class LevelController : MonoBehaviour
 			}
 
 		}
-		PaintBlob[] PBblobs = FindObjectsOfType<PaintBlob>();
+		GridEntity[] PBblobs = FindObjectsOfType<GridEntity>();
 
-		LevelInfo.BlobInfo[] blobs = new LevelInfo.BlobInfo[PBblobs.Length];
+		LevelInfo.GridEntityInfo[] blobs = new LevelInfo.GridEntityInfo[PBblobs.Length];
 		for (int i = 0; i < PBblobs.Length; i++)
 		{
-			blobs[i] = new LevelInfo.BlobInfo { position = PBblobs[i].transform.position, color = PBblobs[i].GetComponent<SpriteRenderer>().color };
+			blobs[i] = new LevelInfo.GridEntityInfo(PBblobs[i]);
 		}
-
-		Instance.LevelStates.Push(new LevelInfo(level, blobs, tmap.cellBounds.position));
-		Debug.Log("Saved state to history");
+		return new LevelInfo(level, blobs, tmap.cellBounds.position);
 	}
 
-	public static void UndoState()
+	static void SetState(LevelInfo newState)
 	{
-		if (Instance.LevelStates.Count ==0)
-		{
-			Debug.LogWarning("Nothing to undo");
-			return;
-		}
-
 		#region clear Level
 
 		if (Instance.TrackTileChanges)
@@ -97,7 +149,6 @@ public class LevelController : MonoBehaviour
 			Destroy(item.gameObject);
 		}
 		#endregion
-		LevelInfo newState = Instance.LevelStates.Pop();
 
 		if (Instance.TrackTileChanges)
 		{
@@ -118,34 +169,9 @@ public class LevelController : MonoBehaviour
 
 		}
 
-		foreach (LevelInfo.BlobInfo item in newState.blobs)
+		foreach (LevelInfo.GridEntityInfo item in newState.Entities)
 		{
-			GameObject b = Instantiate(Instance.blobPrefab, item.position,Quaternion.identity, Instance.tmap.transform);
-			b.GetComponent<SpriteRenderer>().color = item.color;
-		}
-		Debug.Log("Undid (TrackTileChanges: "+ Instance.TrackTileChanges + ")");
-	}
-
-	[System.Serializable]
-	public struct LevelInfo
-	{
-		[SerializeField]
-		public TileBase[,,] tiles;
-		[SerializeField]
-		public BlobInfo[] blobs;
-		[SerializeField]
-		public Vector3Int startPos;
-
-		public LevelInfo(TileBase[,,] tiles, BlobInfo[] blobs, Vector3Int startPos){
-			this.tiles = tiles;
-			this.blobs = blobs;
-			this.startPos = startPos;
-		}
-
-		public struct BlobInfo
-		{
-			public Vector3 position;
-			public Color color;
+			GameObject b = Instantiate(Instance.blobPrefab, item.Original.transform.position, Quaternion.identity, Instance.tmap.transform);
 		}
 	}
 }
