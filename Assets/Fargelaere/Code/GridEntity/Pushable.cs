@@ -116,6 +116,29 @@ public abstract class Pushable : GridEntity
     /// <param name="direction"></param>
     public static void PushAll(Tilemap map, Direction4 direction)
     {
-        throw new NotImplementedException();
+        //Save -> Wait 1 frame
+        IEnumerable<Pushable> pushables = GetGridEntities(map).OfType<Pushable>();
+
+        //Sorts array based on the direction they are being pushed so that objects are pushed in the correct order
+        switch (direction)
+        {
+            case Direction4.Up:
+                pushables = pushables.OrderBy(i => i.TilePosition.y);
+                break;
+            case Direction4.Right:
+                pushables = pushables.OrderByDescending(i => i.TilePosition.x);
+                break;
+            case Direction4.Down:
+                pushables = pushables.OrderByDescending(i => i.TilePosition.y);
+                break;
+            case Direction4.Left:
+                pushables = pushables.OrderBy(i => i.TilePosition.x);
+                break;
+            default:
+                break;
+        }
+
+        pushables.ForEach(i => i.Push(direction));
+
     }
 }

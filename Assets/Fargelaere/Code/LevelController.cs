@@ -35,6 +35,8 @@ public class LevelController : MonoBehaviour
 		//TouchInputController.AddListeners(SaveOldState, SaveOldState);
 		defaultState = GetState();
 
+        TouchInputController.AddListeners(swipe: dir => Pushable.PushAll(tmap, dir));
+
 	}
 
 	private void Update()
@@ -82,7 +84,7 @@ public class LevelController : MonoBehaviour
 		if (!saving)
 		{
 			saving = true;
-			Instance.StartCoroutine("SaveStateCo");
+			Instance?.StartCoroutine(nameof(SaveStateCo));
 		}
 	}
 	private IEnumerator SaveStateCo()

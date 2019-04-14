@@ -21,30 +21,6 @@ public class PushableBlock : Pushable
         }
     }
 
-    private void OnEnable()
-    {
-#if !UNITY_EDITOR
-		 TouchInputController.AddListeners(swipe: Push);   
-#else
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            TouchInputController.AddListeners(swipe: Push);
-        }
-#endif
-    }
-
-    private void OnDisable()
-    {
-#if !UNITY_EDITOR
-		 TouchInputController.RemoveListeners(swipe: Push);   
-#else
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            TouchInputController.RemoveListeners(swipe: Push);
-        }
-#endif
-    }
-
     public override bool Equals(GridEntity other)
     {
         if (other is PushableBlock c)
