@@ -104,6 +104,6 @@ public class PaintBlob : Pushable
     }
 	public override bool Equals(GridEntity other)
 	{
-		return transform.position == other.transform.position && Color == (other as PaintBlob)?.Color;
+		return Color == (other as PaintBlob)?.Color && transform.position == other.transform.position;
 	}
 }

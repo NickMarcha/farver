@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public struct LevelInfo
@@ -6,11 +8,11 @@ public struct LevelInfo
 	/// <summary>
 	/// unactive gameobjects stored under given transform
 	/// </summary>
-    public GridEntityInfo[] Entities;
+    public List<GridEntityInfo> Entities;
 
 	public bool hasInfo;
 
-	public LevelInfo(GridEntityInfo[] entities)
+	public LevelInfo(List<GridEntityInfo> entities)
 	{
 		Entities = entities;
 		hasInfo = true;
@@ -42,7 +44,8 @@ public struct LevelInfo
 
     public bool Equals(LevelInfo other)
     {
-		return GridEntityInfo.CompareArrays(Entities,other.Entities);
+		Debug.Log(GridEntityInfo.CompareLists(Entities, Entities));
+		return GridEntityInfo.CompareLists(Entities,other.Entities);
     }
 
     public static bool operator ==(LevelInfo left, LevelInfo right)
@@ -60,7 +63,7 @@ public struct LevelInfo
         return Entities.GetHashCode();
     }
 
-    public struct GridEntityInfo
+    public struct GridEntityInfo : IEqualityComparer<GridEntityInfo>
 	{
         public GridEntity Original;
 
@@ -75,7 +78,7 @@ public struct LevelInfo
         {
             if (obj is GridEntityInfo i)
             {
-				return Original.Equals(i);
+				return Original.Equals(i.Original);
             }
 
             return false;
@@ -83,30 +86,28 @@ public struct LevelInfo
 
 		public void DeleteOriginal()
 		{
-			UnityEngine.Object.Destroy(Original.gameObject);
+			Object.Destroy(Original.gameObject);
 		}
 
-		public static bool CompareArrays(GridEntityInfo [] left , GridEntityInfo[] right)
+		public static bool CompareLists(List<GridEntityInfo> left , List<GridEntityInfo> right)
 		{
-			if(left.Length != right.Length)
-			{
-				return false;
-			}
-
-			for (int i = 0; i < left.Length; i++)
-			{
-				if (!left[i].Original.Equals(right[i].Original))
-				{
-					return false;
-				}
-			}
-			return true;
+			
+			return left.All(right.Contains);
 		}
 
 		public override int GetHashCode()
-		{
-			//TODO: what?
+		{ 
 			return Original.GetHashCode();
+		}
+
+		public bool Equals(GridEntityInfo x, GridEntityInfo y)
+		{
+			return x.Equals(y);
+		}
+
+		public int GetHashCode(GridEntityInfo obj)
+		{
+			return obj.GetHashCode();
 		}
 	}
 }

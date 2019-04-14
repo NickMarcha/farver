@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -136,18 +137,13 @@ public class LevelController : MonoBehaviour
 
 	static LevelInfo GetState()
 	{
-		
-		GridEntity[] PBblobs = FindObjectsOfType<GridEntity>();
 
-		LevelInfo.GridEntityInfo[] gridEntities = new LevelInfo.GridEntityInfo[PBblobs.Length];
-		for (int i = 0; i < PBblobs.Length; i++)
-		{
-			if (PBblobs[i].gameObject.activeSelf)
-			{
-				gridEntities[i] = new LevelInfo.GridEntityInfo(PBblobs[i], Instance.transform);
-			}
-		}
-		return new LevelInfo(gridEntities);
+		return new LevelInfo(
+			FindObjectsOfType<GridEntity>()
+			.Where(i => i.gameObject.activeSelf)
+			.Select(i => new LevelInfo.GridEntityInfo(i, Instance.transform))
+			.ToList()
+			);
 	}
 
 	static void SetState(LevelInfo newState)
