@@ -91,7 +91,7 @@ public class Pushable : GridEntity
             return false;
         }
 
-        foreach (GridEntity i in GetGridEntities(TileMap).Where(i => i.TilePosition == TilePosition))
+        foreach (GridEntity i in GetGridEntities(TileMap).Where(i => i.TilePosition == tilePosition))
         {
             //The object is occupied by a solid object
             if (!i.CanPass(dir))
