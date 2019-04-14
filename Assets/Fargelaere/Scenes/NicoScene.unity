@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 140761843}
   - component: {fileID: 140761842}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   tmap: {fileID: 1425890000}
   blobPrefab: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
     type: 3}
-  TrackTileChanges: 0
 --- !u!4 &140761843
 Transform:
   m_ObjectHideFlags: 0
@@ -296,6 +295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PaintBlob (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
@@ -1413,6 +1417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PaintBlob (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106905, guid: c1226124edae962498a7759235f7bff7,
         type: 3}

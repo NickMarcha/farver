@@ -60,6 +60,7 @@ public class LevelController : MonoBehaviour
 			item.DeleteInfo();
 		}
 		levelStates = new Stack<LevelInfo>();
+		Debug.Log("Reset Level & history");
 	}
 	#region So it can listen to touchInputController
 	public static void SaveOldState(Direction4 dir)
@@ -91,48 +92,80 @@ public class LevelController : MonoBehaviour
 
 
 		LevelInfo newInfo = GetState();
-
-		if (newInfo.Equals(Instance.defaultState)) {
-			Debug.Log("Didn't save default state");
-			newInfo.DeleteInfo();
-
-		}
-		else if (Instance.levelStates.Count == 0 || !newInfo.Equals(Instance.levelStates.Peek()))
+		if (Instance.levelStates.Count == 0)
+		{
+			if (newInfo.Equals(Instance.defaultState))
+			{
+				Debug.Log("Didn't save default state");
+				return;
+			}else
+			{
+				Instance.levelStates.Push(newInfo);
+				Debug.Log("Saved state to history");
+				return;
+			}
+			
+		} else if (!newInfo.Equals(Instance.levelStates.Peek()))
 		{
 			Instance.levelStates.Push(newInfo);
 			Debug.Log("Saved state to history");
-
-		} else
+			return;
+		}else
 		{
-			Debug.Log("Unexpected?");
+			Debug.Log("State already in history");
 			newInfo.DeleteInfo();
 		}
+
+		Debug.Log("Unexpected behaviour");
+		newInfo.DeleteInfo();
 	}
 
-	public static void UndoState()
+	public static bool CanUndo()
 	{
-		LevelInfo currentState = GetState();
-		if (currentState.Equals(Instance.defaultState))
+		if(Instance?.levelStates.Count > 0)
 		{
-			Debug.LogWarning("Nothing to undo");
-			currentState.DeleteInfo();
-			return;
-		}
-		currentState.DeleteInfo();
-
-		if (Instance.levelStates.Count == 0)
-		{
-			SetState(Instance.defaultState);
-			Debug.Log("Undid back to default");
+			return true;
 		}
 		else
 		{
-			LevelInfo lastState =Instance.levelStates.Pop();
+			LevelInfo currentState = GetState();
+			bool returnValue = true;
+
+			if (currentState.Equals(Instance?.defaultState))
+			{
+				returnValue = false;
+			}
+
+			currentState.DeleteInfo();
+			return returnValue;
+		}
+	}
+	public static void UndoState()
+	{
+		if (Instance.levelStates.Count > 0)
+		{
+			LevelInfo lastState = Instance.levelStates.Pop();
 			SetState(lastState);
 			lastState.DeleteInfo();
 			Debug.Log("Undid ");
 		}
-		
+		else
+		{
+			LevelInfo currentState = GetState();
+			
+
+			if (currentState.Equals(Instance.defaultState))
+			{
+				Debug.LogWarning("Nothing to undo");
+			} else
+			{
+				SetState(Instance.defaultState);
+				Debug.Log("Undid back to default");
+			}
+
+			currentState.DeleteInfo();
+			
+		}
 	}
 
 	static LevelInfo GetState()

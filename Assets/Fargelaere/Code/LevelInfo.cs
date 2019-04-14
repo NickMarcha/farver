@@ -44,7 +44,6 @@ public struct LevelInfo
 
     public bool Equals(LevelInfo other)
     {
-		Debug.Log(GridEntityInfo.CompareLists(Entities, Entities));
 		return GridEntityInfo.CompareLists(Entities,other.Entities);
     }
 
@@ -63,7 +62,7 @@ public struct LevelInfo
         return Entities.GetHashCode();
     }
 
-    public struct GridEntityInfo : IEqualityComparer<GridEntityInfo>
+    public struct GridEntityInfo
 	{
         public GridEntity Original;
 
@@ -98,16 +97,6 @@ public struct LevelInfo
 		public override int GetHashCode()
 		{ 
 			return Original.GetHashCode();
-		}
-
-		public bool Equals(GridEntityInfo x, GridEntityInfo y)
-		{
-			return x.Equals(y);
-		}
-
-		public int GetHashCode(GridEntityInfo obj)
-		{
-			return obj.GetHashCode();
 		}
 	}
 }
