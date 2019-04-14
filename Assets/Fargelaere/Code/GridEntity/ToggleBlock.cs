@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,12 +36,23 @@ public class ToggleBlock : GridEntity
         GetComponent<SpriteRenderer>().sprite = BlockIsSolid ? BlockSprite : OpenSprite;
     }
 
-    private static void ToggleSolidity(GameObject go)
+    private void ToggleSolidity(GameObject go)
     {
-        go.GetComponent<ToggleBlock>().ToggleSolidity();
-    }
+		if (gameObject == go)
+		{
+			LevelController.SaveOldState();
+			StartCoroutine(nameof(CoToggleSolidity));
+		}
+   }
 
-    private void OnEnable()
+	private IEnumerator CoToggleSolidity()
+	{
+		yield return new WaitForEndOfFrame();
+		ToggleSolidity();
+	}
+
+
+	private void OnEnable()
     {
         TouchInputController.AddListeners(tapObj: ToggleSolidity);
     }
