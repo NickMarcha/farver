@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -71,25 +70,38 @@ public class PaintBlob : Pushable
 
 	private void Update()
 	{
+        if (Color == null)
+        {
+            return;
+        }
+
 		Color.Apply(this);
 	}
 
 
 	private void OnEnable()
 	{
-		if (EditorApplication.isPlaying){
-		TouchInputController.AddListeners(swipe: Push);
-		}
-	}
+#if !UNITY_EDITOR
+		 TouchInputController.AddListeners(swipe: Push);   
+#else
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            TouchInputController.AddListeners(swipe: Push);
+        }
+#endif
+    }
 
-	private void OnDisable()
+    private void OnDisable()
 	{
-		if (EditorApplication.isPlaying)
-		{
-			TouchInputController.RemoveListeners(swipe: Push);
-		}
-	}
-
+#if !UNITY_EDITOR
+		 TouchInputController.RemoveListeners(swipe: Push);   
+#else
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            TouchInputController.RemoveListeners(swipe: Push);
+#endif
+        }
+    }
 	public override bool Equals(GridEntity other)
 	{
 		return transform.position == other.transform.position && Color == (other as PaintBlob)?.Color;
