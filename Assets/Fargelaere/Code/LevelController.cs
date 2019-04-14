@@ -15,7 +15,7 @@ public class LevelController : MonoBehaviour
 
 	public GameObject blobPrefab;
 
-	public bool TrackTileChanges = false;
+	//public bool TrackTileChanges = false;
 	private void Awake()
 	{
 		if (!Instance)
@@ -33,7 +33,6 @@ public class LevelController : MonoBehaviour
 
 		TouchInputController.AddListeners(SaveOldState, SaveOldState);
 		defaultState = GetState();
-		//SaveOldState();
 
 	}
 
@@ -55,8 +54,11 @@ public class LevelController : MonoBehaviour
 	public void ResetLevel()
 	{
 		SetState(defaultState);
+		foreach (LevelInfo item in levelStates)
+		{
+			item.DeleteInfo();
+		}
 		levelStates = new Stack<LevelInfo>();
-		SaveOldState();
 	}
 	#region So it can listen to touchInputController
 	public static void SaveOldState(Direction4 dir)
@@ -71,6 +73,15 @@ public class LevelController : MonoBehaviour
 	#endregion
 	public static void SaveOldState()
 	{
+		foreach (Pushable item in FindObjectsOfType<Pushable>())
+		{
+			if (item.Sliding)
+			{
+				Debug.LogWarning("Things Are In Motion");
+				return;
+			}
+		}
+
 		if (Instance == null)
 		{
 			Debug.LogWarning("No instance of LevelController");
@@ -79,104 +90,83 @@ public class LevelController : MonoBehaviour
 
 
 		LevelInfo newInfo = GetState();
-		if (newInfo.Equals(Instance.defaultState) &&(Instance.levelStates.Count == 0 || newInfo.Equals(Instance.levelStates.Peek())))
+
+		if (newInfo.Equals(Instance.defaultState)) {
+			Debug.Log("Didn't save default state");
+			newInfo.DeleteInfo();
+
+		}
+		else if (Instance.levelStates.Count == 0 || !newInfo.Equals(Instance.levelStates.Peek()))
 		{
 			Instance.levelStates.Push(newInfo);
 			Debug.Log("Saved state to history");
+
 		} else
 		{
+			Debug.Log("Unexpected?");
 			newInfo.DeleteInfo();
 		}
 	}
 
 	public static void UndoState()
 	{
-		if (GetState().Equals(Instance.defaultState))
+		LevelInfo currentState = GetState();
+		if (currentState.Equals(Instance.defaultState))
 		{
 			Debug.LogWarning("Nothing to undo");
+			currentState.DeleteInfo();
 			return;
 		}
+		currentState.DeleteInfo();
 
 		if (Instance.levelStates.Count == 0)
 		{
 			SetState(Instance.defaultState);
-
+			Debug.Log("Undid back to default");
 		}
 		else
 		{
 			LevelInfo lastState =Instance.levelStates.Pop();
 			SetState(lastState);
 			lastState.DeleteInfo();
+			Debug.Log("Undid ");
 		}
-		Debug.Log("Undid (TrackTileChanges: " + Instance.TrackTileChanges + ")");
+		
 	}
 
 	static LevelInfo GetState()
 	{
-		Tilemap tmap = Instance.tmap;
-		TileBase[,,] level = new TileBase[tmap.cellBounds.size.x, tmap.cellBounds.size.y, tmap.cellBounds.size.z];
-
-		if (Instance.TrackTileChanges)
-		{
-			for (int x = 0; x < level.GetLength(0); x++)
-			{
-				for (int y = 0; y < level.GetLength(1); y++)
-				{
-					for (int z = 0; z < level.GetLength(2); z++)
-					{
-						level[x, y, z] = tmap.GetTile(new Vector3Int(x, y, z) + tmap.cellBounds.position);
-					}
-				}
-			}
-
-		}
+		
 		GridEntity[] PBblobs = FindObjectsOfType<GridEntity>();
 
-		LevelInfo.GridEntityInfo[] blobs = new LevelInfo.GridEntityInfo[PBblobs.Length];
+		LevelInfo.GridEntityInfo[] gridEntities = new LevelInfo.GridEntityInfo[PBblobs.Length];
 		for (int i = 0; i < PBblobs.Length; i++)
 		{
-			blobs[i] = new LevelInfo.GridEntityInfo(PBblobs[i],Instance.transform);
+			if (PBblobs[i].gameObject.activeSelf)
+			{
+				gridEntities[i] = new LevelInfo.GridEntityInfo(PBblobs[i], Instance.transform);
+			}
 		}
-		return new LevelInfo(level, blobs, tmap.cellBounds.position);
+		return new LevelInfo(gridEntities);
 	}
 
 	static void SetState(LevelInfo newState)
 	{
 		#region clear Level
-
-		if (Instance.TrackTileChanges)
+		GridEntity[] blobs = FindObjectsOfType<GridEntity>();
+		foreach (GridEntity item in blobs)
 		{
-			Instance.tmap.ClearAllTiles();
-		}
-		PaintBlob[] blobs = FindObjectsOfType<PaintBlob>();
-		foreach (PaintBlob item in blobs)
-		{
-			Destroy(item.gameObject);
+			if (item.gameObject.activeSelf)
+			{
+				Destroy(item.gameObject);
+			}
 		}
 		#endregion
-
-		if (Instance.TrackTileChanges)
-		{
-			TileBase[,,] level = newState.tiles;
-
-			Vector3Int startPos = newState.startPos;
-
-			for (int i = 0; i < level.GetLength(0); i++)
-			{
-				for (int u = 0; u < level.GetLength(1); u++)
-				{
-					for (int o = 0; o < level.GetLength(2); o++)
-					{
-						Instance.tmap.SetTile(new Vector3Int(i, u, o) + startPos, level[i, u, o]);
-					}
-				}
-			}
-
-		}
 
 		foreach (LevelInfo.GridEntityInfo item in newState.Entities)
 		{
 			GameObject b = Instantiate(item.Original.gameObject, Instance.tmap.transform);
+			b.transform.position = item.Original.transform.position;
 			b.SetActive(true);
 		}
 	}

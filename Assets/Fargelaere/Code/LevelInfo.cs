@@ -1,22 +1,27 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public struct LevelInfo : IEquatable<LevelInfo>
 {
-    public TileBase[,,] tiles;
+    //public TileBase[,,] tiles;
 
     public GridEntityInfo[] Entities;
 
-    public Vector3Int startPos;
+	//public Vector3Int startPos;
 
-    public LevelInfo(TileBase[,,] tiles, GridEntityInfo[] entities, Vector3Int startPos)
-    {
-        this.tiles = tiles;
-        Entities = entities;
-        this.startPos = startPos;
-    }
+	public LevelInfo(GridEntityInfo[] entities)
+	{
+		Entities = entities;
+	}
+	//public LevelInfo(TileBase[,,] tiles, GridEntityInfo[] entities, Vector3Int startPos)
+ //   {
+ //       this.tiles = tiles;
+ //       Entities = entities;
+ //       this.startPos = startPos;
+ //   }
 	public void DeleteInfo()
 	{
 		foreach (GridEntityInfo item in Entities)
@@ -80,8 +85,8 @@ public struct LevelInfo : IEquatable<LevelInfo>
 
     public bool Equals(LevelInfo other)
     {
-        return startPos == other.startPos &&
-            Entities.SequenceEqual(other.Entities) /* &&
+		return /* startPos == other.startPos &&*/
+			GridEntityInfo.CompareArrays(Entities,other.Entities); /* &&
             ThreeDArrayEquals(tiles, other.tiles)*/;
     }
 
@@ -97,7 +102,7 @@ public struct LevelInfo : IEquatable<LevelInfo>
 
     public override int GetHashCode()
     {
-        return tiles.GetHashCode() ^ Entities.GetHashCode() ^ startPos.GetHashCode();
+        return /* tiles.GetHashCode() ^ */Entities.GetHashCode()/* ^ startPos.GetHashCode()*/;
     }
 
     public struct GridEntityInfo
@@ -108,6 +113,7 @@ public struct LevelInfo : IEquatable<LevelInfo>
         public GridEntityInfo(GridEntity original, Transform trans)
         {
             Original = UnityEngine.Object.Instantiate(original.gameObject, trans).GetComponent<GridEntity>();
+			Original.transform.position = original.transform.position;
 			Original.gameObject.SetActive(false);
         }
 
@@ -125,5 +131,28 @@ public struct LevelInfo : IEquatable<LevelInfo>
 		{
 			UnityEngine.Object.Destroy(Original.gameObject);
 		}
-    }
+
+		public static bool CompareArrays(GridEntityInfo [] left , GridEntityInfo[] right)
+		{
+			if(left.Length != right.Length)
+			{
+				return false;
+			}
+
+			for (int i = 0; i < left.Length; i++)
+			{
+				if (!left[i].Original.Equals(right[i].Original))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public override int GetHashCode()
+		{
+			//TODO: what?
+			return Original.GetHashCode();
+		}
+	}
 }
