@@ -44,6 +44,9 @@ TagManager:
   - name: Tiles
     uniqueID: 1738903511
     locked: 0
+  - name: Intermediate
+    uniqueID: 2246186587
+    locked: 0
   - name: Blobs
     uniqueID: 4063511961
     locked: 0
