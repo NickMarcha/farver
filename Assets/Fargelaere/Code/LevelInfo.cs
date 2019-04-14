@@ -7,11 +7,11 @@ public struct LevelInfo : IEquatable<LevelInfo>
 {
     public TileBase[,,] tiles;
 
-    public GridEntity[] Entities;
+    public BlobInfo[] Entities;
 
     public Vector3Int startPos;
 
-    public LevelInfo(TileBase[,,] tiles, GridEntity[] entities, Vector3Int startPos)
+    public LevelInfo(TileBase[,,] tiles, BlobInfo[] entities, Vector3Int startPos)
     {
         this.tiles = tiles;
         Entities = entities;
