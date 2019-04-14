@@ -70,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: -2048780709
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e7c6e1e7d5d1ad048bd074cec370d9f8, type: 3}
-  m_Color: {r: 0, g: 0.74464154, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 4e0e066c99662dd49bcce0a7a0a9e705, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockIsSolid: 0
-  BlockSprite: {fileID: 21300000, guid: 0806acb7cfad2cf4385a481f957c760b, type: 3}
-  OpenSprite: {fileID: 21300000, guid: e7c6e1e7d5d1ad048bd074cec370d9f8, type: 3}
+  BlockSprite: {fileID: 21300000, guid: 7afde2a50dfd47348b81c75a0ce2e1a3, type: 3}
+  OpenSprite: {fileID: 21300000, guid: 4e0e066c99662dd49bcce0a7a0a9e705, type: 3}
 --- !u!65 &7875771584748379610
 BoxCollider:
   m_ObjectHideFlags: 0

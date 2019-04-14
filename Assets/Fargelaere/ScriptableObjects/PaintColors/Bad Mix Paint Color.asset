@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bad Mix Paint Color
   m_EditorClassIdentifier: 
   Colorization: {r: 1, g: 1, b: 1, a: 1}
-  BadMixSprite: {fileID: 21300000, guid: e7c6e1e7d5d1ad048bd074cec370d9f8, type: 3}
+  BadMixSprite: {fileID: 21300000, guid: a46779a997e9d7748b3870ba3535411f, type: 3}

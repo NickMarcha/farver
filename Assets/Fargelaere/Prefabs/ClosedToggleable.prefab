@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7012782790742116085, guid: 0c9d92487939bf845a6d1cc5006d622a,
         type: 3}
       propertyPath: m_Name
-      value: New Sprite
+      value: ClosedToggleable
       objectReference: {fileID: 0}
     - target: {fileID: 7012782790742116084, guid: 0c9d92487939bf845a6d1cc5006d622a,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0806acb7cfad2cf4385a481f957c760b,
+      objectReference: {fileID: 21300000, guid: 7afde2a50dfd47348b81c75a0ce2e1a3,
         type: 3}
     - target: {fileID: 8588565919663906481, guid: 0c9d92487939bf845a6d1cc5006d622a,
         type: 3}
