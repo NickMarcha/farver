@@ -27,6 +27,11 @@ public class ToggleBlock : GridEntity
 
     public void ToggleSolidity()
     {
+        if (GetGridEntities(TileMap).Any(i => i.TilePosition == TilePosition && i != this))
+        {
+            return;
+        }
+
         BlockIsSolid = !BlockIsSolid;
         UpdateSprite();
     }
