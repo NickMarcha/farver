@@ -83,5 +83,7 @@ public abstract class GridEntity : MonoBehaviour, IEquatable<GridEntity>
         return map.GetComponentsInChildren<GridEntity>();
     }
 
-	public abstract bool Equals(GridEntity other);
+	public virtual bool Equals(GridEntity other) {
+		return transform.position == other.transform.position;
+	}
 }
