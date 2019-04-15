@@ -14,6 +14,8 @@ public class PushableBlock : Pushable
 
     protected override void OnSlideStop()
     {
+		base.OnSlideStop();
+
         //Destorys any paint blob it comes in contact with
         GetGridEntities(TileMap)
             .OfType<PaintBlob>()

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 /// <summary>
@@ -12,6 +13,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public abstract class Pushable : GridEntity
 {
+	public static UnityEvent blockStopped = new UnityEvent();
     /// <summary>
     /// The time it will take for this object to move one tile
     /// </summary>
@@ -112,7 +114,9 @@ public abstract class Pushable : GridEntity
     /// <summary>
     /// Event: Triggered when the object stops moving
     /// </summary>
-    protected virtual void OnSlideStop() { }
+    protected virtual void OnSlideStop() {
+		blockStopped?.Invoke();
+	}
 
     /// <summary>
     /// Pushes every pushable object in the given tilemap

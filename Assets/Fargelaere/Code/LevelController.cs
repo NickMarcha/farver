@@ -62,7 +62,10 @@ public class LevelController : MonoBehaviour
 			item.DeleteInfo();
 		}
 		Instance.levelStates = new Stack<LevelInfo>();
+
+		//TouchInputController.Instance?.InputHappened?.Invoke();
 		Debug.Log("Reset Level & history");
+		InGameMenuHandler.UpGraphs?.Invoke();
 	}
 	#region So it can listen to touchInputController
 	public static void SaveOldState(Direction4 dir)
@@ -140,9 +143,12 @@ public class LevelController : MonoBehaviour
 
 	public static bool CanUndo()
 	{
+		Debug.Log("oh my");
 		if(Instance?.levelStates.Count > 0)
 		{
+			Debug.Log("oh my1");
 			return true;
+			
 		}
 		else
 		{
@@ -151,6 +157,7 @@ public class LevelController : MonoBehaviour
 
 			if (currentState.Equals(Instance?.defaultState))
 			{
+				Debug.Log("oh my3");
 				returnValue = false;
 			}
 
