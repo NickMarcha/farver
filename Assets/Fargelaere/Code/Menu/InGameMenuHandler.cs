@@ -37,8 +37,6 @@ public class InGameMenuHandler : MonoBehaviour
 
 	public void UpdateGraphics()
 	{
-
-		//TODO: actually updateGraphics
 		RestartButton.Active = UndoButton.Active = LevelController.CanUndo();
 	}
 }

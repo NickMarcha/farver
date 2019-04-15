@@ -54,6 +54,11 @@ public class LevelController : MonoBehaviour
 		{
 			ResetLevel();
 		}
+
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			WonGame();
+		}
 	}
 
 	public static void ResetLevel()
