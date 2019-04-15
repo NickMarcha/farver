@@ -50,3 +50,6 @@ TagManager:
   - name: Blobs
     uniqueID: 4063511961
     locked: 0
+  - name: Box
+    uniqueID: 1052454667
+    locked: 0

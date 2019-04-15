@@ -44,8 +44,6 @@ public abstract class Pushable : GridEntity
     public void ChangeDirection(Direction4 newDirection)
     {
         StopAllCoroutines();
-        Sliding = false;
-
         StartCoroutine(CoPush(newDirection));
     }
     
@@ -76,6 +74,7 @@ public abstract class Pushable : GridEntity
         }
 
         Sliding = false;
+        OnSlideStop();
     }
 
     /// <summary>
@@ -111,6 +110,11 @@ public abstract class Pushable : GridEntity
     protected virtual void OnSlideOnto(PuzzleTile tile, Direction4 dir) { }
 
     /// <summary>
+    /// Event: Triggered when the object stops moving
+    /// </summary>
+    protected virtual void OnSlideStop() { }
+
+    /// <summary>
     /// Pushes every pushable object in the given tilemap
     /// </summary>
     /// <param name="direction"></param>
@@ -123,13 +127,13 @@ public abstract class Pushable : GridEntity
         switch (direction)
         {
             case Direction4.Up:
-                pushables = pushables.OrderBy(i => i.TilePosition.y);
+                pushables = pushables.OrderByDescending(i => i.TilePosition.y);
                 break;
             case Direction4.Right:
                 pushables = pushables.OrderByDescending(i => i.TilePosition.x);
                 break;
             case Direction4.Down:
-                pushables = pushables.OrderByDescending(i => i.TilePosition.y);
+                pushables = pushables.OrderBy(i => i.TilePosition.y);
                 break;
             case Direction4.Left:
                 pushables = pushables.OrderBy(i => i.TilePosition.x);

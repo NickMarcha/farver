@@ -9,16 +9,16 @@ public class PushableBlock : Pushable
 {
     public override bool CanPass(Direction4 incommingDirection)
     {
-        return false;
+        return Sliding;
     }
 
-    public override void OnSlideIntoObject(GridEntity other)
+    protected override void OnSlideStop()
     {
         //Destorys any paint blob it comes in contact with
-        if (other is PaintBlob)
-        {
-            Destroy(other.gameObject);
-        }
+        GetGridEntities(TileMap)
+            .OfType<PaintBlob>()
+            .Where(i => TilePosition == i.TilePosition)
+            .ForEach(i => Destroy(i.gameObject));
     }
 
     public override bool Equals(GridEntity other)
