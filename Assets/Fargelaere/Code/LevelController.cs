@@ -227,13 +227,22 @@ public class LevelController : MonoBehaviour
 		}
 	}
 
+	static bool hasWon = false;
+
 	public static void WonGame()
 	{
 		if (!Instance)
 		{
 			Debug.Log("No level controller");
 		}
-		
+
+		if(hasWon)
+		{
+			return;
+		}
+
+		hasWon = true;
+
 		Debug.Log("won stage ");
 		foreach (LevelInfo item in Instance.levelStates)
 		{
@@ -270,6 +279,8 @@ public class LevelController : MonoBehaviour
 	{
 		yield return new WaitForEndOfFrame();
 		Instance.defaultState = GetState();
+
+		hasWon = false;
 	}
 
 
