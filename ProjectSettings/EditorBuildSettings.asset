@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Fargelaere/Scenes/GameScene.unity
+    guid: c7141ba947b1a8649b81f14b1b030432
   m_configObjects: {}
