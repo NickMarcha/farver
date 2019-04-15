@@ -214,7 +214,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 531698515}
   - component: {fileID: 531698517}
   - component: {fileID: 531698516}
+  - component: {fileID: 531698518}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -317,7 +318,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Klovnen K\xE5re Kasper & Boyz\n\n\nNotRealPeople\xA9"
+  m_text: "\nNotRealPeople\xA9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -363,7 +364,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 29
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -386,12 +387,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 531698516}
-    characterCount: 43
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 5
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 5
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -420,6 +421,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 531698514}
   m_CullTransparentMesh: 0
+--- !u!114 &531698518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531698514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3bc8682b67ccb4398e5c7743bd3457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: -0.5
+  ySpeed: 0.07
+  ScaleWidth: 0
+  ScaleHeight: 0
+  Rotate: 1
+  Color: 1
 --- !u!1001 &1214251222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -541,6 +560,7 @@ GameObject:
   - component: {fileID: 1289355433}
   - component: {fileID: 1289355432}
   - component: {fileID: 1289355434}
+  - component: {fileID: 1289355435}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -564,7 +584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 518}
+  m_AnchoredPosition: {x: -2, y: 332}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1289355432
@@ -587,7 +607,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0806acb7cfad2cf4385a481f957c760b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 652dde9d351bee2458fe7a815dbe271e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -634,6 +654,24 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   activeSprite: {fileID: 21300000, guid: 4e0e066c99662dd49bcce0a7a0a9e705, type: 3}
   unActiveSprite: {fileID: 21300000, guid: 7afde2a50dfd47348b81c75a0ce2e1a3, type: 3}
+--- !u!114 &1289355435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289355430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64e3575aa09f9048947796819d6190a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: 0.6
+  ySpeed: -0.1
+  ScaleWidth: 1
+  ScaleHeight: 1
+  Rotate: 1
+  Color: 0
 --- !u!1 &1386273146
 GameObject:
   m_ObjectHideFlags: 0
