@@ -66,7 +66,7 @@ public abstract class GridEntity : MonoBehaviour, IEquatable<GridEntity>
     /// </summary>
     /// <param name="dir"></param>
     /// <returns></returns>
-    public virtual bool CanPass(Direction4 incommingDirection)
+    public virtual bool CanPass(GridEntity other, Direction4 incommingDirection)
     {
         return true;
     }
