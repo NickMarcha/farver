@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7012782790742116083}
   - component: {fileID: 8588565919663906481}
   - component: {fileID: 7875771584748379610}
+  - component: {fileID: 8944938779249642250}
   m_Layer: 0
   m_Name: OpenToggleable
   m_TagString: Untagged
@@ -109,3 +110,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8977695, z: 0.2}
   m_Center: {x: 0.5, y: 0.44888476, z: 0}
+--- !u!114 &8944938779249642250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012782790742116085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c204be879ce1c6040ace868c54bc1161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
