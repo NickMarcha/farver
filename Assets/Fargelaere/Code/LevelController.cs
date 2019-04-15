@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class LevelController : MonoBehaviour
 {
-	public List<GameObject> Levels = new List<GameObject>();
+	public List<LevelHolder> Levels = new List<LevelHolder>();
 	public int currentLevel = 1;
 	public static LevelController Instance { get; private set; }
 	public Tilemap tmap;
@@ -32,10 +32,7 @@ public class LevelController : MonoBehaviour
 			return;
 		}
 
-		levelStates = new Stack<LevelInfo>();
-
-		//TouchInputController.AddListeners(SaveOldState, SaveOldState);
-		defaultState = GetState();
+		LoadLevel();
 
         TouchInputController.AddListeners(swipe: dir => Pushable.PushAll(tmap, dir));
 
@@ -251,17 +248,38 @@ public class LevelController : MonoBehaviour
 			Debug.Log("Won whole game");
 			return;
 		}
-		GameObject level = Instantiate(Instance.Levels.ElementAt(Instance.currentLevel-1));
-		Instance.tmap = level.GetComponentInChildren<Tilemap>();
 
-		
-		Instance.levelStates = new Stack<LevelInfo>();
-		Instance.StartCoroutine(nameof(SaveAfterLoad));
-		
+		Instance.LoadLevel();
 	}
+
+	private void LoadLevel()
+	{
+		LevelHolder newLevel = Levels.ElementAt(Instance.currentLevel - 1);
+		GameObject level = Instantiate(newLevel.LevelPrefab);
+		tmap = level.GetComponentInChildren<Tilemap>();
+		Camera.main.orthographicSize = newLevel.IsBig ? 9.5f : 5;
+
+		levelStates = new Stack<LevelInfo>();
+
+		StartCoroutine(nameof(SaveAfterLoad));
+
+
+	}
+
 	private IEnumerator SaveAfterLoad()
 	{
 		yield return new WaitForEndOfFrame();
 		Instance.defaultState = GetState();
+	}
+
+
+
+	[System.Serializable]
+	public struct LevelHolder
+	{
+		[SerializeField]
+		public GameObject LevelPrefab;
+		[SerializeField]
+		public bool IsBig;
 	}
 }
