@@ -85,8 +85,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: 1033}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchoredPosition: {x: 74.65, y: 1033}
+  m_SizeDelta: {x: 180.7, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2334324540726272362
 CanvasRenderer:
@@ -116,7 +116,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300006, guid: 19873fbc2d39c534dbad759db8fad234, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a538201052285844181cdcb771be0ac2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  activeSprite: {fileID: 21300004, guid: 19873fbc2d39c534dbad759db8fad234, type: 3}
-  unActiveSprite: {fileID: 21300000, guid: 7afde2a50dfd47348b81c75a0ce2e1a3, type: 3}
+  activeSprite: {fileID: 21300000, guid: e74be3308b486764cbbc00125c7d825d, type: 3}
+  unActiveSprite: {fileID: 21300000, guid: a538201052285844181cdcb771be0ac2, type: 3}
 --- !u!1 &8743074276307841072
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,8 +280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 324, y: 1033}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchoredPosition: {x: 316.5, y: 1033}
+  m_SizeDelta: {x: 160, y: 205.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4555564632016171249
 CanvasRenderer:
@@ -311,7 +311,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0806acb7cfad2cf4385a481f957c760b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: affe438aad9f39a4d80c4ecbb9aea5c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -337,5 +337,5 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  activeSprite: {fileID: 21300000, guid: 0806acb7cfad2cf4385a481f957c760b, type: 3}
-  unActiveSprite: {fileID: 21300000, guid: 7afde2a50dfd47348b81c75a0ce2e1a3, type: 3}
+  activeSprite: {fileID: 21300000, guid: 39bfcba48b9825341b76badc1567dd86, type: 3}
+  unActiveSprite: {fileID: 21300000, guid: affe438aad9f39a4d80c4ecbb9aea5c0, type: 3}
