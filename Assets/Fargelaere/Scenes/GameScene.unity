@@ -142,12 +142,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Levels:
-  - LevelPrefab: {fileID: 6326006420510684982, guid: ae068e2199707594b918f65e4cd9c3b5,
+  - LevelPrefab: {fileID: 6326006420510684982, guid: 93f47ec2c986d3142b6dce5af565dbb1,
       type: 3}
     IsBig: 0
-  - LevelPrefab: {fileID: 2264837727583475562, guid: 60f717548bd659d4abaa07a77b90690d,
+  - LevelPrefab: {fileID: 4998454317993537379, guid: 4830fbeb838318041b4fa0099fb83f48,
+      type: 3}
+    IsBig: 0
+  - LevelPrefab: {fileID: 2264837727583475562, guid: 1e30f0a3c5437b04ea3b6ef9d9ccbf30,
       type: 3}
     IsBig: 1
+  - LevelPrefab: {fileID: 6326006420510684982, guid: 11ce955a682834d4c868d7fc69b7911f,
+      type: 3}
+    IsBig: 0
   currentLevel: 1
   tmap: {fileID: 0}
   blobPrefab: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
