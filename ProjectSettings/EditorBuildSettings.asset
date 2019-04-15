@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Fargelaere/Scenes/MainMenu.unity
+    guid: 2f5fbef9aac28de49a7905f2cbfd2cfe
+  - enabled: 1
     path: Assets/Fargelaere/Scenes/GameScene.unity
     guid: c7141ba947b1a8649b81f14b1b030432
+  - enabled: 1
+    path: Assets/Fargelaere/Scenes/LevelSelect.unity
+    guid: d5183c413e8c79d48ab7c1dddfd56444
+  - enabled: 1
+    path: Assets/Fargelaere/Scenes/Credits.unity
+    guid: c871557708792a945ac20ec547933bab
   m_configObjects: {}
