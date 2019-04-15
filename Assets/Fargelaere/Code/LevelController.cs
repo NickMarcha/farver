@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 
 public class LevelController : MonoBehaviour
 {
+	public List<GameObject> Levels = new List<GameObject>();
+	public int currentLevel = 1;
 	public static LevelController Instance { get; private set; }
 	public Tilemap tmap;
 
@@ -143,10 +145,8 @@ public class LevelController : MonoBehaviour
 
 	public static bool CanUndo()
 	{
-		Debug.Log("oh my");
 		if(Instance?.levelStates.Count > 0)
 		{
-			Debug.Log("oh my1");
 			return true;
 			
 		}
@@ -157,7 +157,6 @@ public class LevelController : MonoBehaviour
 
 			if (currentState.Equals(Instance?.defaultState))
 			{
-				Debug.Log("oh my3");
 				returnValue = false;
 			}
 
@@ -223,5 +222,23 @@ public class LevelController : MonoBehaviour
 			b.transform.position = item.Original.transform.position;
 			b.SetActive(true);
 		}
+	}
+
+	public static void WonGame()
+	{
+		if (!Instance)
+		{
+			Debug.Log("No level controller");
+		}
+		Destroy(Instance.tmap.transform.parent.gameObject);
+
+		Instance.currentLevel++;
+		if(Instance.currentLevel > Instance.Levels.Count)
+		{
+			Debug.Log("Won whole game");
+			return;
+		}
+		GameObject level = Instantiate(Instance.Levels.ElementAt(Instance.currentLevel-1));
+		Instance.tmap = level.GetComponentInChildren<Tilemap>();
 	}
 }

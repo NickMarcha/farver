@@ -39,7 +39,7 @@ public class ColorTarget : GridEntity
     {
         if (other is PaintBlob && CheckForWinState())
         {
-            Debug.Log("You win gem lol");
+			LevelController.WonGame();
         }
 
     }
