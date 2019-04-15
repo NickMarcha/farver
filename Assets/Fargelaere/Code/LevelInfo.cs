@@ -85,6 +85,7 @@ public struct LevelInfo
 
 		public void DeleteOriginal()
 		{
+			Debug.Log("deleted " + Original.gameObject);
 			Object.Destroy(Original.gameObject);
 		}
 

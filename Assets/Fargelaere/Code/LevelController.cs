@@ -235,8 +235,15 @@ public class LevelController : MonoBehaviour
 		{
 			Debug.Log("No level controller");
 		}
-		Destroy(Instance.tmap.transform.parent.gameObject);
+		
+		Debug.Log("won stage ");
+		foreach (LevelInfo item in Instance.levelStates)
+		{
+			item.DeleteInfo();
+		}
+		Instance.defaultState.DeleteInfo();
 
+		Destroy(Instance.tmap.transform.parent.gameObject);
 		Instance.currentLevel++;
 		if(Instance.currentLevel > Instance.Levels.Count)
 		{
@@ -245,5 +252,9 @@ public class LevelController : MonoBehaviour
 		}
 		GameObject level = Instantiate(Instance.Levels.ElementAt(Instance.currentLevel-1));
 		Instance.tmap = level.GetComponentInChildren<Tilemap>();
+
+		
+		Instance.levelStates = new Stack<LevelInfo>();
+		Instance.defaultState = GetState();
 	}
 }
