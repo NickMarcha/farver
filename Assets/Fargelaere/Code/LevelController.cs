@@ -100,10 +100,10 @@ public class LevelController : MonoBehaviour
 	private IEnumerator SaveStateCo()
 	{
 		yield return new WaitForEndOfFrame();
-		saveOldState();
+		SaveOldStateMethod();
 		saving = false;
 	}
-	static void saveOldState()
+	static void SaveOldStateMethod()
 	{
 		foreach (Pushable item in FindObjectsOfType<Pushable>())
 		{
@@ -127,6 +127,7 @@ public class LevelController : MonoBehaviour
 			if (newInfo.Equals(Instance.defaultState))
 			{
 				Debug.Log("Didn't save default state");
+				newInfo.DeleteInfo();
 				return;
 			}else
 			{
@@ -255,6 +256,12 @@ public class LevelController : MonoBehaviour
 
 		
 		Instance.levelStates = new Stack<LevelInfo>();
+		Instance.StartCoroutine(nameof(SaveAfterLoad));
+		
+	}
+	private IEnumerator SaveAfterLoad()
+	{
+		yield return new WaitForEndOfFrame();
 		Instance.defaultState = GetState();
 	}
 }
