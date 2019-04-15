@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class LevelController : MonoBehaviour
@@ -255,6 +256,10 @@ public class LevelController : MonoBehaviour
 		if(Instance.currentLevel > Instance.Levels.Count)
 		{
 			Debug.Log("Won whole game");
+			AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(3));
+
+			loading.allowSceneActivation = true;
+
 			return;
 		}
 
