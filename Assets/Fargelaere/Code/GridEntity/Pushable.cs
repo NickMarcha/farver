@@ -58,7 +58,7 @@ public abstract class Pushable : GridEntity
         }
 
         Sliding = true;
-        while (CanSlideIntoPosition(getNextPosition(), direction))
+        while (CanSlideIntoPosition(this, getNextPosition(), direction))
         {
             //Slide one tile over
             yield return CoSlideToTilePosition(getNextPosition(), SlideTime);
@@ -85,7 +85,7 @@ public abstract class Pushable : GridEntity
     /// <param name="tilePosition"></param>
     /// <param name="dir"></param>
     /// <returns></returns>
-    private bool CanSlideIntoPosition(Vector3Int tilePosition, Direction4 dir)
+    private bool CanSlideIntoPosition(GridEntity sender, Vector3Int tilePosition, Direction4 dir)
     {
         //The position is occupied by a solid tile
         if (!((TileMap.GetTile(tilePosition) as PuzzleTile)?.CanPass(dir) ?? true))
@@ -96,7 +96,7 @@ public abstract class Pushable : GridEntity
         foreach (GridEntity i in GetGridEntities(TileMap).Where(i => i.TilePosition == tilePosition))
         {
             //The object is occupied by a solid object
-            if (!i.CanPass(dir))
+            if (!i.CanPass(sender, dir))
             {
                 return false;
             }

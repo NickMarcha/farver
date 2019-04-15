@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class PushableBlock : Pushable
 {
-    public override bool CanPass(Direction4 incommingDirection)
+    public override bool CanPass(GridEntity other, Direction4 incommingDirection)
     {
         return Sliding;
     }

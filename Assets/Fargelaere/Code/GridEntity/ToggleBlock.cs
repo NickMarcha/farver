@@ -15,7 +15,7 @@ public class ToggleBlock : GridEntity
     public Sprite BlockSprite;
     public Sprite OpenSprite;
 
-    public override bool CanPass(Direction4 incommingDirection)
+    public override bool CanPass(GridEntity other, Direction4 incommingDirection)
     {
         return !BlockIsSolid;
     }
@@ -27,6 +27,11 @@ public class ToggleBlock : GridEntity
 
     public void ToggleSolidity()
     {
+        if (GetGridEntities(TileMap).Any(i => i.TilePosition == TilePosition && i != this))
+        {
+            return;
+        }
+
         BlockIsSolid = !BlockIsSolid;
         UpdateSprite();
     }
