@@ -46,6 +46,14 @@ public class LevelController : MonoBehaviour
 
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(0));
+
+			loading.allowSceneActivation = true;
+
+			return;
+		}
 		//Only for debug purposes
 
 		if (Input.GetKeyDown(KeyCode.Z))
