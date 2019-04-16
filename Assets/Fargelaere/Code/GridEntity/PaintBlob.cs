@@ -55,6 +55,7 @@ public class PaintBlob : Pushable
 
 		Destroy(blob.gameObject);
 		result.Apply(this);
+		AudioController.PlayThumpHigh();
 
         //Patches goals not recognizing blobs if they merge while ontop of it
         GetGridEntities(TileMap)

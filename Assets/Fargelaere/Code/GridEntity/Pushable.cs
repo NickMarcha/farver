@@ -116,6 +116,7 @@ public abstract class Pushable : GridEntity
     /// </summary>
     protected virtual void OnSlideStop() {
 		blockStopped?.Invoke();
+		AudioController.PlayThumpLow();
 	}
 
     /// <summary>
