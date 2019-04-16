@@ -55,15 +55,17 @@ public class PaintBlob : Pushable
 
 		Destroy(blob.gameObject);
 		result.Apply(this);
+
 		AudioController.PlayThumpHigh();
+		ChangeDirection(null);
 
-        //Patches goals not recognizing blobs if they merge while ontop of it
-        GetGridEntities(TileMap)
-            .Where(i => i.TilePosition == TilePosition && !(i is PaintBlob)) //Please don't remove the second part of this and operation here or Unity will be very mad >:( (Stack Overflow Exception)
-            .ForEach(i => { i.OnSlideIntoObject(this); OnSlideIntoObject(i); });
+		//Patches goals not recognizing blobs if they merge while ontop of it
+		GetGridEntities(TileMap)
+			.Where(i => i.TilePosition == TilePosition && !(i is PaintBlob)) //Please don't remove the second part of this and operation here or Unity will be very mad >:( (Stack Overflow Exception)
+			.ForEach(i => { i.OnSlideIntoObject(this); OnSlideIntoObject(i); });
 
 
-    }
+	}
 
 	public override void OnSlideIntoObject(GridEntity other)
 	{
@@ -77,12 +79,24 @@ public class PaintBlob : Pushable
 
 	private void Update()
 	{
-        if (Color == null)
-        {
-            return;
-        }
+		if (Color == null)
+		{
+			return;
+		}
 
 		Color.Apply(this);
+
+		PaintBlob nearbyBlob = GetGridEntities(TileMap)
+	.OfType<PaintBlob>()
+	.FirstOrDefault(i => i.GetInstanceID() > GetInstanceID() && Vector3.Distance(i.transform.position, transform.position) < 0.35f);
+
+		if (nearbyBlob)
+		{
+			MergeWith(nearbyBlob);
+			transform.position = TilePosition;
+		}
+
+		
 	}
 
 	public override bool Equals(GridEntity other)
