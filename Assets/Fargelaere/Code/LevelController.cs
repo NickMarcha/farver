@@ -8,6 +8,8 @@ using UnityEngine.Tilemaps;
 
 public class LevelController : MonoBehaviour
 {
+	public static int moves = 0;
+
 	public List<LevelHolder> Levels = new List<LevelHolder>();
 	public int currentLevel = 1;
 	public static LevelController Instance { get; private set; }
@@ -36,7 +38,7 @@ public class LevelController : MonoBehaviour
 		LoadLevel();
 
         TouchInputController.AddListeners(swipe: dir => Pushable.PushAll(tmap, dir));
-
+		moves = 0;
 	}
 
 	private void Update()
@@ -118,7 +120,7 @@ public class LevelController : MonoBehaviour
 			return;
 		}
 
-
+		moves++;
 		LevelInfo newInfo = GetState();
 		if (Instance.levelStates.Count == 0)
 		{

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class InGameMenuHandler : MonoBehaviour
 {
 	public MenuButton UndoButton;
 	public MenuButton RestartButton;
+	public TextMeshProUGUI MoveCounter;
 
 	public static UnityEvent UpGraphs = new UnityEvent();
 	private void OnEnable()
@@ -38,5 +40,6 @@ public class InGameMenuHandler : MonoBehaviour
 	public void UpdateGraphics()
 	{
 		RestartButton.Active = UndoButton.Active = LevelController.CanUndo();
+		MoveCounter.text = LevelController.moves.ToString();
 	}
 }
