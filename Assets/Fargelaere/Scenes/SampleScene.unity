@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b549ee5ccd002e44b597c9e32b5a967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Levels: []
+  currentLevel: 1
   tmap: {fileID: 1425890000}
   blobPrefab: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
     type: 3}
@@ -194,7 +196,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -360,17 +362,17 @@ PrefabInstance:
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8867924
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.20496619
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.20496619
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
@@ -467,17 +469,17 @@ PrefabInstance:
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.8867924
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.20496619
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106904, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.20496619
       objectReference: {fileID: 0}
     - target: {fileID: 340648160179106907, guid: c1226124edae962498a7759235f7bff7,
         type: 3}
@@ -1750,6 +1752,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483174136212384681, guid: da65fbe4f515ae14794dd4b93cbc40c1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483174136212384681, guid: da65fbe4f515ae14794dd4b93cbc40c1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483174136212384681, guid: da65fbe4f515ae14794dd4b93cbc40c1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da65fbe4f515ae14794dd4b93cbc40c1, type: 3}
