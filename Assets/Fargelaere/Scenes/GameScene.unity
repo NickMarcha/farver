@@ -154,6 +154,12 @@ MonoBehaviour:
   - LevelPrefab: {fileID: 6326006420510684982, guid: 11ce955a682834d4c868d7fc69b7911f,
       type: 3}
     IsBig: 0
+  - LevelPrefab: {fileID: 2264837727583475562, guid: 653fa902e84ce3c42bc719880afa20d1,
+      type: 3}
+    IsBig: 1
+  - LevelPrefab: {fileID: 2264837727583475562, guid: a1cca790647b66b448ca4c4ba973121c,
+      type: 3}
+    IsBig: 1
   currentLevel: 1
   tmap: {fileID: 0}
   blobPrefab: {fileID: 340648160179106910, guid: c1226124edae962498a7759235f7bff7,
@@ -480,19 +486,19 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2042404571, guid: c1717f9d1812d664888accd58d289002, type: 3}
+    - target: {fileID: 1562513232, guid: c1717f9d1812d664888accd58d289002, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2042404571, guid: c1717f9d1812d664888accd58d289002, type: 3}
+    - target: {fileID: 1562513232, guid: c1717f9d1812d664888accd58d289002, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1562513232, guid: c1717f9d1812d664888accd58d289002, type: 3}
+    - target: {fileID: 2042404571, guid: c1717f9d1812d664888accd58d289002, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1562513232, guid: c1717f9d1812d664888accd58d289002, type: 3}
+    - target: {fileID: 2042404571, guid: c1717f9d1812d664888accd58d289002, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
