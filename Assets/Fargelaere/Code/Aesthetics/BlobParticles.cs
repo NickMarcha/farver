@@ -34,6 +34,13 @@ public class BlobParticles : MonoBehaviour
 
         while (true)
         {
+            //Do not create paint particles for badly mixed paint blobs 
+            if (GetComponent<PaintBlob>()?.Color.Equals(GetComponent<PaintBlob>()?.Fallback) == true)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
             CreateBlob();
             yield return new WaitForSecondsRealtime(Random.Range(WaitMinTime, WaitMaxTime));
         }
