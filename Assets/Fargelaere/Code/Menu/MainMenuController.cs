@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+	public MenuButton HighscoreButton;
+	public int HighscoreScene;
+
 	public MenuButton StartGameButton;
 	public int GameScene;
 
@@ -17,12 +20,20 @@ public class MainMenuController : MonoBehaviour
 
 	private void Awake()
 	{
+		HighscoreButton?.GotPressed.AddListener(Highscore);
 		StartGameButton?.GotPressed.AddListener(StartGame);
 		LevelSelectButton?.GotPressed.AddListener(LevelSelect);
 		CreditsButton?.GotPressed.AddListener(Credits);
 
 		QuitButton?.GotPressed.AddListener(Quit);
 
+	}
+
+	public void Highscore()
+	{
+		AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(HighscoreScene));
+
+		loading.allowSceneActivation = true;
 	}
 
 	public void StartGame()

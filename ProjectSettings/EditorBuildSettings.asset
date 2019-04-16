@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Fargelaere/Scenes/Credits.unity
     guid: c871557708792a945ac20ec547933bab
+  - enabled: 1
+    path: Assets/Fargelaere/Scenes/LeaderBoard.unity
+    guid: 6a968bda012758c42af248cb978b2055
   m_configObjects: {}

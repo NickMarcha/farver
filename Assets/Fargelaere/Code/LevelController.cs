@@ -21,6 +21,8 @@ public class LevelController : MonoBehaviour
 
 	public GameObject blobPrefab;
 
+	public static bool CompletedGame = false;
+
 	//public bool TrackTileChanges = false;
 	private void Awake()
 	{
@@ -39,6 +41,7 @@ public class LevelController : MonoBehaviour
 
         TouchInputController.AddListeners(swipe: dir => Pushable.PushAll(tmap, dir));
 		moves = 0;
+		CompletedGame = false;
 	}
 
 	private void Update()
@@ -258,6 +261,7 @@ public class LevelController : MonoBehaviour
 		if(Instance.currentLevel > Instance.Levels.Count)
 		{
 			Debug.Log("Won whole game");
+			CompletedGame = true;
 			AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(3));
 
 			loading.allowSceneActivation = true;
