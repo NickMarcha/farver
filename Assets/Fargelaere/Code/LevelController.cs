@@ -68,7 +68,7 @@ public class LevelController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.N))
 		{
-			WonGame();
+			//WonGame();
 		}
 	}
 
