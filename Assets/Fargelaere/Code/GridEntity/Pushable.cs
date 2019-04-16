@@ -125,8 +125,12 @@ public abstract class Pushable : GridEntity
     /// <param name="direction"></param>
     public static void PushAll(Tilemap map, Direction4 direction)
     {
-        //Save -> Wait 1 frame
         IEnumerable<Pushable> pushables = GetGridEntities(map).OfType<Pushable>();
+
+        if (GetGridEntities(map).OfType<Pushable>().Any(i => i.Sliding))
+        {
+            return;
+        }
 
         //Sorts array based on the direction they are being pushed so that objects are pushed in the correct order
         switch (direction)
