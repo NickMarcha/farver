@@ -27,7 +27,7 @@ public class ToggleBlock : GridEntity
 
     public void ToggleSolidity()
     {
-        if (GetGridEntities(TileMap).Any(i => i.TilePosition == TilePosition && i != this))
+        if (GetGridEntities(TileMap).Any(i => i.TilePosition == TilePosition && i != this || ((i as Pushable)?.Sliding ?? false)))
         {
             return;
         }
