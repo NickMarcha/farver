@@ -16,10 +16,11 @@ public class LeaderBoardHandler : MonoBehaviour
 
 	private void OnEnable()
 	{
+		postScoreButton.GotPressed.AddListener(PostScore);
 		if (LevelController.CompletedGame)
 		{
 			PostScoreMenu();
-			postScoreButton.GotPressed.AddListener(PostScore);
+			
 		}
 		else
 		{
@@ -49,7 +50,7 @@ public class LeaderBoardHandler : MonoBehaviour
 			return;
 		}
 		PostScoreMenuCanv.SetActive(false);
-		Highscores.AddNewHighscore(inputName.text, (1000 - (LevelController.moves * 10)));
+		Highscores.AddNewHighscore(inputName.text, int.Parse(Score.text));
 
 	}
 }
