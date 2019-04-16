@@ -49,6 +49,7 @@ public abstract class Pushable : GridEntity
 		if (newDirection == null)
 		{
 			transform.position = TilePosition;
+			Sliding = false;
 		}
 		else
 		{
