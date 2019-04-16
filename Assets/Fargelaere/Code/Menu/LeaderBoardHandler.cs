@@ -39,7 +39,7 @@ public class LeaderBoardHandler : MonoBehaviour
 	public void PostScoreMenu()
 	{
 		PostScoreMenuCanv.SetActive(true);
-		Score.text = Mathf.Max(0, 1000 - (LevelController.moves * 10)).ToString();
+		Score.text = Mathf.Max(0, 5000 - (LevelController.moves * 10)).ToString();
 
 	}
 

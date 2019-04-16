@@ -153,7 +153,7 @@ PlayerSettings:
   targetPixelDensity: 30
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 2
-  androidMaxAspectRatio: 2.1
+  androidMaxAspectRatio: 2.1111112
   applicationIdentifier:
     Android: com.NotRealPeople.Farge
     Standalone: com.NotRealPeople.Farver
