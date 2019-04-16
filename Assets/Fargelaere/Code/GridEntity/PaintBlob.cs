@@ -93,10 +93,7 @@ public class PaintBlob : Pushable
 		if (nearbyBlob)
 		{
 			MergeWith(nearbyBlob);
-			transform.position = TilePosition;
 		}
-
-		
 	}
 
 	public override bool Equals(GridEntity other)

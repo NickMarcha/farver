@@ -48,7 +48,7 @@ public abstract class Pushable : GridEntity
 		StopAllCoroutines();
 		if (newDirection == null)
 		{
-			//TODO: things stop, lets hope we don't have to do more
+			transform.position = TilePosition;
 		}
 		else
 		{
