@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 340648160179106904}
   - component: {fileID: 340648160179106907}
   - component: {fileID: 4759643212952886007}
+  - component: {fileID: 2232845487128952541}
   m_Layer: 0
   m_Name: PaintBlob
   m_TagString: Untagged
@@ -132,3 +133,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c204be879ce1c6040ace868c54bc1161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2232845487128952541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340648160179106910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7feaf70c31d57419fb15759b88c90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  Particle: {fileID: 577140401414335026, guid: 43222b51775cef340b62d4008c7eff65, type: 3}
+  FadeSpeedBase: 2
+  WaitMinTime: 0
+  WaitMaxTime: 0.05
+  FadeSpeedRandomness: 1
+  ScaleMinMultiplier: 0.5
+  ScaleMaxMultiplier: 2
+  PositionRandomness: 0.2
+  PositionOffset: {x: 0.5, y: 0.5}

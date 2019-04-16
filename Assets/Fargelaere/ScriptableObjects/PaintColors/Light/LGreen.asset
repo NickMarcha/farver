@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595fdc82867771b46bcf65aa1e44d3cc, type: 3}
   m_Name: LGreen
   m_EditorClassIdentifier: 
-  Colorization: {r: 0.562477, g: 0.9622642, b: 0.54013884, a: 1}
+  Colorization: {r: 0.21305028, g: 1, b: 0.1745283, a: 1}
