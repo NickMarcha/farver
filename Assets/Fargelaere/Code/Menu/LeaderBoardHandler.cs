@@ -20,7 +20,7 @@ public class LeaderBoardHandler : MonoBehaviour
 		if (LevelController.CompletedGame)
 		{
 			PostScoreMenu();
-			
+
 		}
 		else
 		{
@@ -51,6 +51,6 @@ public class LeaderBoardHandler : MonoBehaviour
 		}
 		PostScoreMenuCanv.SetActive(false);
 		Highscores.AddNewHighscore(inputName.text, int.Parse(Score.text));
-
+		LevelController.CompletedGame = false;
 	}
 }
