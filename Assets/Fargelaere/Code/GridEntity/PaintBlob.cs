@@ -88,7 +88,7 @@ public class PaintBlob : Pushable
 
 		PaintBlob nearbyBlob = GetGridEntities(TileMap)
 	.OfType<PaintBlob>()
-	.FirstOrDefault(i => i.GetInstanceID() > GetInstanceID() && Vector3.Distance(i.transform.position, transform.position) < 0.35f);
+	.FirstOrDefault(i => ((i.Sliding && Sliding)?(i.GetInstanceID() > GetInstanceID()):(i.Sliding)) && Vector3.Distance(i.transform.position, transform.position) < 0.35f);
 
 		if (nearbyBlob)
 		{
