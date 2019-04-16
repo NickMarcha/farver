@@ -262,7 +262,7 @@ public class LevelController : MonoBehaviour
 		{
 			Debug.Log("Won whole game");
 			CompletedGame = true;
-			AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(3));
+			AsyncOperation loading = SceneManager.LoadSceneAsync(SceneUtility.GetScenePathByBuildIndex(4));
 
 			loading.allowSceneActivation = true;
 
