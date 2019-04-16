@@ -154,10 +154,13 @@ MonoBehaviour:
   - LevelPrefab: {fileID: 6326006420510684982, guid: 11ce955a682834d4c868d7fc69b7911f,
       type: 3}
     IsBig: 0
-  - LevelPrefab: {fileID: 2264837727583475562, guid: 653fa902e84ce3c42bc719880afa20d1,
+  - LevelPrefab: {fileID: 2264837727583475562, guid: 76292d43be4a84947b7af4db30c16ebc,
       type: 3}
     IsBig: 1
   - LevelPrefab: {fileID: 2264837727583475562, guid: a1cca790647b66b448ca4c4ba973121c,
+      type: 3}
+    IsBig: 1
+  - LevelPrefab: {fileID: 2264837727583475562, guid: 383afbc128206864d84282fe7702751a,
       type: 3}
     IsBig: 1
   currentLevel: 1
