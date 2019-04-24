@@ -15,6 +15,7 @@ public class MainMenuController : MonoBehaviour
 	public MenuButton CreditsButton;
 	public int CreditsScene;
 
+	public MenuButton PrivacyButton;
 	public MenuButton QuitButton;
 
 
@@ -26,6 +27,8 @@ public class MainMenuController : MonoBehaviour
 		CreditsButton?.GotPressed.AddListener(Credits);
 
 		QuitButton?.GotPressed.AddListener(Quit);
+
+		PrivacyButton?.GotPressed.AddListener(OpenPrivacyPolicy);
 
 	}
 
@@ -64,5 +67,10 @@ public class MainMenuController : MonoBehaviour
 #else
       Application.Quit();
 #endif
+	}
+	
+	void OpenPrivacyPolicy()
+	{
+		Application.OpenURL("https://unity3d.com/legal/privacy-policy");
 	}
 }

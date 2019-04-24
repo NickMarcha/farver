@@ -159,7 +159,7 @@ PlayerSettings:
     Standalone: com.NotRealPeople.Farver
   buildNumber:
     Standalone: 0.9
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 26
   AndroidPreferredInstallLocation: 1
