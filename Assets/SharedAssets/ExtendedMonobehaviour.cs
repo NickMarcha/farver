@@ -333,16 +333,6 @@ public abstract class ExtendedMonoBehaviour : UnityEngine.MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Gets the first GUIElement of this game object. If it does not exist, null will be returned
-    /// </summary>
-    public new GUIElement guiElement
-    {
-        get
-        {
-            return GetComponent<GUIElement>();
-        }
-    }
 
     /// <summary>
     /// Gets the HingeJoint of this game object. If it does not exist, null will be returned

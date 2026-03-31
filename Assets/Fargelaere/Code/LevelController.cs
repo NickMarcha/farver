@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,7 +116,7 @@ public class LevelController : MonoBehaviour
 	}
 	static void SaveOldStateMethod()
 	{
-		foreach (Pushable item in FindObjectsOfType<Pushable>())
+		foreach (Pushable item in FindObjectsByType<Pushable>(FindObjectsSortMode.None))
 		{
 			if (item.Sliding)
 			{
@@ -213,7 +213,7 @@ public class LevelController : MonoBehaviour
 	{
 
 		return new LevelInfo(
-			FindObjectsOfType<GridEntity>()
+			FindObjectsByType<GridEntity>(FindObjectsSortMode.None)
 			.Where(i => i.gameObject.activeSelf)
 			.Select(i => new LevelInfo.GridEntityInfo(i, Instance.transform))
 			.ToList()
@@ -223,7 +223,7 @@ public class LevelController : MonoBehaviour
 	static void SetState(LevelInfo newState)
 	{
 		#region clear Level
-		GridEntity[] blobs = FindObjectsOfType<GridEntity>();
+		GridEntity[] blobs = FindObjectsByType<GridEntity>(FindObjectsSortMode.None);
 		foreach (GridEntity item in blobs)
 		{
 			if (item.gameObject.activeSelf)

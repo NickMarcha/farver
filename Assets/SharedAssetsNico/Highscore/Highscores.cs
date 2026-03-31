@@ -1,5 +1,7 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,6 +10,7 @@ public class Highscores : MonoBehaviour {
 
     const string privateCode = "CS6ji0qZ9U2ahsuiR2BkEA0sfB4Ck8SEu60uHAQSvBug";
     const string publicCode = "5cb5f9363eba5e041c089e8e";
+    // Dreamlo free leaderboards are HTTP-only ("SSL not enabled"); migrate to your HTTPS backend when ready.
     const string webURL = "http://dreamlo.com/lb/";
 
     public Highscore[] highscoresList;
@@ -69,18 +72,44 @@ public class Highscores : MonoBehaviour {
 
     void FormatHighscores(string textStream)
     {
-        string[] entries = textStream.Split(new char[] {'\n'},System.StringSplitOptions.RemoveEmptyEntries);
-
-        highscoresList = new Highscore[entries.Length];
-
-        for (int i = 0; i < entries.Length; i++)
+        if (string.IsNullOrWhiteSpace(textStream))
         {
-            string[] entryInfo = entries[i].Split(new char[] {'|'});
-
-            highscoresList[i] = new Highscore(entryInfo[0], int.Parse(entryInfo[1]), entryInfo[4]);
-            Debug.Log(highscoresList[i].username +" : "+ highscoresList[i].score +" : " + highscoresList[i].dateAndTime);
+            highscoresList = Array.Empty<Highscore>();
+            return;
         }
-        
+
+        string trimmed = textStream.Trim();
+        if (trimmed.StartsWith("ERROR:", StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.LogWarning("DreamLo / highscores: " + trimmed);
+            highscoresList = Array.Empty<Highscore>();
+            return;
+        }
+
+        string[] entries = trimmed.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var list = new List<Highscore>(entries.Length);
+
+        foreach (string line in entries)
+        {
+            string[] parts = line.Split('|');
+            // pipe format: name|score|?|?|date|rank (dreamlo)
+            if (parts.Length < 5)
+            {
+                continue;
+            }
+
+            if (!int.TryParse(parts[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int score))
+            {
+                continue;
+            }
+
+            string name = parts[0]?.Trim() ?? "";
+            string when = parts[4]?.Trim() ?? "";
+            list.Add(new Highscore(name, score, when));
+            Debug.Log(name + " : " + score + " : " + when);
+        }
+
+        highscoresList = list.ToArray();
     }
 }
 

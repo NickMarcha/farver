@@ -182,7 +182,7 @@ public static class CommonExtensions
     /// <param name="maxZ">Maximum z speed</param>
     public static void MoveInDirection(this Rigidbody rigidbody, Vector3 direction, float speed)
     {
-        rigidbody.velocity = (direction * speed) + (Vector3.up * rigidbody.velocity.y);
+        rigidbody.linearVelocity = (direction * speed) + (Vector3.up * rigidbody.linearVelocity.y);
     }
 
     /// <summary>
@@ -405,9 +405,9 @@ public static class CommonExtensions
     /// <param name="rb">Rigidbody to rotate</param>
     public static void RotateToForward(this Rigidbody2D rb)
     {
-        if (rb.velocity != Vector2.zero)
+        if (rb.linearVelocity != Vector2.zero)
         {
-            Vector2 dir = rb.velocity;
+            Vector2 dir = rb.linearVelocity;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             rb.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             rb.transform.Rotate(90);

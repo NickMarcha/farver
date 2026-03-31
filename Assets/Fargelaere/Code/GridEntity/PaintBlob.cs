@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,8 +69,8 @@ public class PaintBlob : Pushable
 
 	public override void OnSlideIntoObject(GridEntity other)
 	{
-		//GetInstanceID() > other.getInstanceID() makes sure the merge only happens for one of the blobs and not both.
-		if (other is PaintBlob && GetInstanceID() > other.GetInstanceID())
+		//Entity id tie-break ensures only one blob runs MergeWith when both collide.
+		if (other is PaintBlob && GetEntityId() > other.GetEntityId())
 		{
 			MergeWith(other as PaintBlob);
 		}
@@ -88,7 +88,7 @@ public class PaintBlob : Pushable
 
 		PaintBlob nearbyBlob = GetGridEntities(TileMap)
 	.OfType<PaintBlob>()
-	.FirstOrDefault(i => ((i.Sliding && Sliding)?(i.GetInstanceID() > GetInstanceID()):(i.Sliding)) && Vector3.Distance(i.transform.position, transform.position) < 0.35f);
+	.FirstOrDefault(i => ((i.Sliding && Sliding)?(i.GetEntityId() > GetEntityId()):(i.Sliding)) && Vector3.Distance(i.transform.position, transform.position) < 0.35f);
 
 		if (nearbyBlob)
 		{
